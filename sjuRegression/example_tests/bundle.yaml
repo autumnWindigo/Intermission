@@ -1,0 +1,27 @@
+# Start by naming each test at the base of the yaml
+#     my_fun_string: str
+#    my_fun_list_of_floats: list[float]
+
+bundle_test_my_float:
+  # Objects are denoted by !Object
+  #  they're given the same name as the object you created in example_tests.py
+  #  you can put objects in objects, or pass custom objects outside of just context
+  - !MyContext
+    # !!str is not necessary, but it guaruntees the yaml is a string
+
+    # Variable names must match the ones defined in MyContext
+
+    # again, find more type bindings here
+    # https://pyyaml.org/wiki/PyYAMLDocumentation
+    my_fun_string: !!str "some string"
+    my_fun_list_of_floats: [!!float "1.54", !!float "1.23"]
+
+  - !MyContext
+    my_fun_string: !!str "some string"
+    my_fun_list_of_floats: [!!float "1.54", !!float "1.23"]
+
+# In python, this whole file is parsed as a dict[str, list[MyContext]]
+bundle_test_my_string:
+  - !MyContext
+    my_fun_string: !!str "some string"
+    my_fun_list_of_floats: [!!float "1.54", !!float "1.23"]

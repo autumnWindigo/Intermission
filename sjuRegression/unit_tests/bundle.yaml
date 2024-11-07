@@ -1,0 +1,17 @@
+bundle_test_concurrency:
+  - !Context
+    web_address: https://www.google.com/
+    web_address_answer: https://www.google.com/
+    basic_auth: !BasicAuth
+      credentials: !Credentials
+          username: gAAAAABmvXjUM2ROvoIqp_VT-tn8KmV5jfeHPS7h6WoZzs8Tj8VEx1Tr1D99EqIKeffGLDZi9Lc75gq52-IxuSVSjdTz46CNVg==
+          password: gAAAAABmvXjUNlTCttGHCMHRYTa9mku-Ohk1qXEITX1v4tEmI0DoB2wMTmFCDl77gsA6s_aWiaF27EmHLkTMVyIhiRfJx1ruyA==
+
+bundle_test_basic_auth:
+  - !Context
+    web_address: !!str "https://authenticationtest.com/HTTPAuth/"
+    web_address_answer: !!str "https://authenticationtest.com/loginSuccess/"
+    basic_auth: !BasicAuth
+      credentials: !Credentials
+          username: gAAAAABmvXjUM2ROvoIqp_VT-tn8KmV5jfeHPS7h6WoZzs8Tj8VEx1Tr1D99EqIKeffGLDZi9Lc75gq52-IxuSVSjdTz46CNVg==
+          password: gAAAAABmvXjUNlTCttGHCMHRYTa9mku-Ohk1qXEITX1v4tEmI0DoB2wMTmFCDl77gsA6s_aWiaF27EmHLkTMVyIhiRfJx1ruyA==
