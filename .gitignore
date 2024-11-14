@@ -12,3 +12,13 @@ __pycache__
 .venv
 *.env
 pip-selfcheck.json
+
+### react ###
+.DS_*
+*.log
+logs
+**/*.backup.*
+**/*.back.*
+
+node_modules
+bower_components
