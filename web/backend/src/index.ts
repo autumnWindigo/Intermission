@@ -13,6 +13,7 @@ import { AppDataSource } from "./data-source";
 import testController from "./controllers/TestController";
 import testPost from "./entrypoints/TestPost";
 import testPut from "./entrypoints/TestPut";
+import testDelete from "./entrypoints/TestDelete";
 
 const app = express();
 const PORT = 8000;
@@ -27,10 +28,11 @@ AppDataSource.initialize()
         console.log("DB Innitialized")
     }).catch((error: any) => console.log("Error during DS init:", error));
 
-// Insert routers
-app.use("/api", testController);
+// Insert routers for Tests
+app.use("/api", testController); // GET
 app.use("/api", testPost);
 app.use("/api", testPut);
+app.use("/api", testDelete);
 
 // Run Server
 app.listen(PORT, () => {
