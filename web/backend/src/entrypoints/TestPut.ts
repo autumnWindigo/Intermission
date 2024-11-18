@@ -14,7 +14,7 @@ function isTest(test: Test | null): test is Test {
 
 const testPut = Router();
 
-testPut.put("/api/test/:id", async (req: Request, res: Response) => {
+testPut.put("test/:id", async (req: Request, res: Response) => {
     // setup
     const { id } = req.params;
     const { fileName, testName, filePath, groups, timestamp, reports } = req.body;

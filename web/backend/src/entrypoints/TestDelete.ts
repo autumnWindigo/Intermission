@@ -9,7 +9,7 @@ import { Test } from "../entity/Test";
 
 const testDelete = Router();
 
-testDelete.delete("/api/test/:id", async (req: Request, res: Response) => {
+testDelete.delete("/test/:id", async (req: Request, res: Response) => {
     const { id } = req.params;
 
     try {

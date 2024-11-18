@@ -9,25 +9,34 @@ import { Test } from "../entity/Test";
 
 const testController = Router();
 
-testController.get("/test/:id", async (req: Request<{ id: string }>, res: Response): Promise<void> => {
+testController.get("/test/:id?", async (req: Request<{ id: string }>, res: Response): Promise<void> => {
     const { id } = req.params;
 
     try {
         const repo = AppDataSource.getRepository(Test);
 
-        // Find test by ID
-        const test = await repo.findOne({
-            where: { testId: parseInt(id) },
-            relations: ["groups", "timestamp", "reports"],
-        });
+        if (id) {
+            // Find test by ID
+            const test = await repo.findOne({
+                where: { testId: parseInt(id) },
+                relations: ["groups", "timestamp", "reports"],
+            });
 
-        // Early return if none
-        if (!test) {
-            res.status(404).json({ error: "test not found" });
+            // Early return if none
+            if (!test) {
+                res.status(404).json({ error: "test not found" });
+                return;
+            }
+
+            res.json(test);
             return;
         }
 
-        res.json(test);
+        const tests = await repo.find({
+            relations: ["groups", "timestamp", "reports"],
+        });
+
+        res.json(tests)
 
     } catch (error) {
         console.error(error);

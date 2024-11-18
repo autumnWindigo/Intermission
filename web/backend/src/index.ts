@@ -14,6 +14,7 @@ import testController from "./controllers/TestController";
 import testPost from "./entrypoints/TestPost";
 import testPut from "./entrypoints/TestPut";
 import testDelete from "./entrypoints/TestDelete";
+import testGroupController from "./controllers/TestGroupController";
 
 const app = express();
 const PORT = 8000;
@@ -29,10 +30,13 @@ AppDataSource.initialize()
     }).catch((error: any) => console.log("Error during DS init:", error));
 
 // Insert routers for Tests
-app.use("/api", testController); // GET
+app.use("/api", testController); // GET (test:/id)
 app.use("/api", testPost);
 app.use("/api", testPut);
 app.use("/api", testDelete);
+
+// Insert routers for Test Groups
+app.use("/api", testGroupController); // GET (test-groups/:id?)
 
 // Run Server
 app.listen(PORT, () => {
