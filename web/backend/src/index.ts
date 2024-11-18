@@ -1,3 +1,8 @@
+//*** Andrew Kantner
+//*** Database Management Systems
+//*** December 5
+//*** Main Server for backend
+
 import "reflect-metadata"
 
 import express from "express";
@@ -6,6 +11,7 @@ import cors from "cors";
 
 import { AppDataSource } from "./data-source";
 import testController from "./controllers/TestController";
+import testPost from "./entrypoints/TestPost";
 
 const app = express();
 const PORT = 8000;
@@ -22,6 +28,7 @@ AppDataSource.initialize()
 
 // Insert routers
 app.use("/api", testController);
+app.use("/api", testPost);
 
 // Run Server
 app.listen(PORT, () => {

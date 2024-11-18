@@ -1,3 +1,8 @@
+//*** Andrew Kantner
+//*** Database Management Systems
+//*** December 5
+//*** Data source for mariadb
+
 import "reflect-metadata";
 import "dotenv/config";
 
