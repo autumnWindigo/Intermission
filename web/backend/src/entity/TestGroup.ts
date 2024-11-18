@@ -11,7 +11,7 @@ export class TestGroup {
     @PrimaryGeneratedColumn()
     TestGroupID!: number;
 
-    @Column()
+    @Column('text', {nullable: true})
     name!: string;
 
     @ManyToMany(() => Test, test => test.groups)

@@ -8,34 +8,43 @@ import { Report } from "./Report";
 import { TestGroup } from "./TestGroup";
 import { TestTimestamp } from "./TestTimestamp";
 
+/*
+Cascading works differently with typeorm
+
+Basically if it's cascading it joins the objects together
+so we can use Test.reports to get the list of reports
+
+pretty much creates pointers to the others and has the
+Test object control if they're gc'd or not
+*/
+
 @Entity()
 export class Test {
     @PrimaryGeneratedColumn()
     testId!: number;
 
-    @Column()
+    @Column("text")
     fileName!: string;
 
-    @Column()
+    @Column("text")
     testName!: string;
 
-    @Column()
+    @Column("text", { nullable: true })
     filePath: string | undefined;
 
-    @OneToOne(() => TestTimestamp, timestamp => timestamp.test, {
+    @OneToOne(() => TestTimestamp, (timestamp) => timestamp.test, {
         cascade: true,
     })
     timestamp!: TestTimestamp;
 
-    @ManyToMany(() => TestGroup, group => group.tests, {
+    @ManyToMany(() => TestGroup, (group) => group.tests, {
         cascade: true,
     })
     @JoinTable()
     groups!: TestGroup[];
 
-    @OneToMany(()=> Report, report => report.test, {
+    @OneToMany(() => Report, (report) => report.test, {
         cascade: true,
     })
-    @JoinTable()
     reports!: Report[];
 }

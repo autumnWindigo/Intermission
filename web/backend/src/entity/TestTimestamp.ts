@@ -11,21 +11,19 @@ export class TestTimestamp {
     @PrimaryGeneratedColumn()
     testTimestampID!: number;
 
-    @Column()
+    @Column("text")
     firstAdded!: string;
 
-    @Column()
+    @Column("text", { nullable: true })
     lastRun: string | undefined;
 
-    @Column()
+    @Column("text", { nullable: true })
     lastUpdated: string | undefined;
 
-    @Column()
+    @Column("text", { nullable: true})
     lastFailed: string | undefined;
 
-    @OneToOne(() => Test, test => test.timestamp, {
-        cascade: true,
-    })
+    @OneToOne(() => Test, test => test.timestamp)
     @JoinColumn()
     test!: Test
 }

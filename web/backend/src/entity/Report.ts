@@ -11,10 +11,10 @@ export class Report {
     @PrimaryGeneratedColumn()
     resultId!: number;
 
-    @Column()
+    @Column("boolean")
     pass!: boolean;
 
-    @Column()
+    @Column("text")
     timestamp!: string;
 
     @ManyToOne(() => Test, test => test.reports)
