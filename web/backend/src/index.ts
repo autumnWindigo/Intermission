@@ -12,6 +12,7 @@ import cors from "cors";
 import { AppDataSource } from "./data-source";
 import testController from "./controllers/TestController";
 import testPost from "./entrypoints/TestPost";
+import testPut from "./entrypoints/TestPut";
 
 const app = express();
 const PORT = 8000;
@@ -29,6 +30,7 @@ AppDataSource.initialize()
 // Insert routers
 app.use("/api", testController);
 app.use("/api", testPost);
+app.use("/api", testPut);
 
 // Run Server
 app.listen(PORT, () => {
