@@ -12,9 +12,9 @@ function isTest(test: Test | null): test is Test {
     return test !== null;
 }
 
-const testPut = Router();
+const router = Router();
 
-testPut.put("test/:id", async (req: Request, res: Response) => {
+router.put("test/:id", async (req: Request, res: Response) => {
     // setup
     const { id } = req.params;
     const { fileName, testName, filePath, groups, timestamp, reports } = req.body;
@@ -49,4 +49,4 @@ testPut.put("test/:id", async (req: Request, res: Response) => {
     }
 });
 
-export default testPut;
+export default router;

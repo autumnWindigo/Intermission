@@ -7,9 +7,9 @@ import { Router, Request, Response } from "express";
 import { AppDataSource } from "../data-source";
 import { Test } from "../entity/Test";
 
-const testDelete = Router();
+const router = Router();
 
-testDelete.delete("/test/:id", async (req: Request, res: Response) => {
+router.delete("/test/:id", async (req: Request, res: Response) => {
     const { id } = req.params;
 
     try {
@@ -34,4 +34,4 @@ testDelete.delete("/test/:id", async (req: Request, res: Response) => {
     }
 });
 
-export default testDelete;
+export default router;

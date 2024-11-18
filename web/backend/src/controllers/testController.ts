@@ -7,9 +7,9 @@ import { Router, Request, Response } from "express";
 import { AppDataSource } from "../data-source";
 import { Test } from "../entity/Test";
 
-const testController = Router();
+const router = Router();
 
-testController.get("/test/:id?", async (req: Request<{ id: string }>, res: Response): Promise<void> => {
+router.get("/test/:id?", async (req: Request<{ id: string }>, res: Response): Promise<void> => {
     const { id } = req.params;
 
     try {
@@ -44,4 +44,4 @@ testController.get("/test/:id?", async (req: Request<{ id: string }>, res: Respo
     }
 });
 
-export default testController;
+export default router;

@@ -7,9 +7,9 @@ import { Router, Request, Response } from "express";
 import { AppDataSource } from "../data-source";
 import { TestGroup } from "../entity/TestGroup";
 
-const testGroupController = Router();
+const router = Router();
 
-testGroupController.get("/test-groups/:id?", async (req: Request, res: Response) => {
+router.get("/test-groups/:id?", async (req: Request, res: Response) => {
     const { id } = req.params;
 
     try {
@@ -55,4 +55,4 @@ testGroupController.get("/test-groups/:id?", async (req: Request, res: Response)
     }
 });
 
-export default testGroupController;
+export default router;

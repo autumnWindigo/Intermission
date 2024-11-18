@@ -10,11 +10,11 @@ import bodyParser from "body-parser";
 import cors from "cors";
 
 import { AppDataSource } from "./data-source";
-import testController from "./controllers/TestController";
-import testPost from "./entrypoints/TestPost";
-import testPut from "./entrypoints/TestPut";
-import testDelete from "./entrypoints/TestDelete";
-import testGroupController from "./controllers/TestGroupController";
+import testController from "./controllers/testController";
+import testPost from "./entrypoints/testPost";
+import testPut from "./entrypoints/testPut";
+import testDelete from "./entrypoints/testDelete";
+import testGroupController from "./controllers/testGroupController";
 
 const app = express();
 const PORT = 8000;
