@@ -54,9 +54,18 @@ export async function runPytestForTestGroup(groupId: number): Promise<TestResult
 
         // When pytest successfully closes
         pytest.on("close", async (code) => {
+            /* TODO TODO TODO
+            tests/unit_tests/unit_tests.py .u,.  [ 50%]
+            pytest output lines look like this for each file
+            need to write regex to match the ',' and 'u' between '.'
+            to count amount of passed and failed tests
+
+            (in case of skip I want to explicitly count failed)
+            */
+
             // Parse output from pytest success
-            const passedSubtests = (stdout.match(/, (.+?) passed/g) || []).length;
-            const failedSubtests = (stdout.match(/, (.+?) failed/g) || []).length;
+            const passedSubtests = -1
+            const failedSubtests = -1
             const overallSuccess = code === 0;
 
             // Create and save TestResult
