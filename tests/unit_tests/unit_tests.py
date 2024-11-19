@@ -4,7 +4,6 @@ from playwright.async_api._generated import Page
 
 
 # Title: Exmaple Context
-
 # Details: What are we adding
 class Context(BundleContext):
     web_address: str

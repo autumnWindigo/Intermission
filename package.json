@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "@types/node": "^22.9.0",
-    "mysql2": "^3.11.4",
-    "reflect-metadata": "^0.2.2",
-    "typeorm": "^0.3.20"
-  }
-}
