@@ -19,7 +19,7 @@ router.get("/test/:id?", async (req: Request<{ id: string }>, res: Response): Pr
             // Find test by ID
             const test = await repo.findOne({
                 where: { testId: parseInt(id) },
-                relations: ["groups", "timestamp", "reports"],
+                relations: ["groups", "timestamp"],
             });
 
             // Early return if none
@@ -33,7 +33,7 @@ router.get("/test/:id?", async (req: Request<{ id: string }>, res: Response): Pr
         }
 
         const tests = await repo.find({
-            relations: ["groups", "timestamp", "reports"],
+            relations: ["groups", "timestamp"],
         });
 
         res.json(tests)

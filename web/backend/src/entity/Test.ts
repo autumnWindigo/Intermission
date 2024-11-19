@@ -4,7 +4,6 @@
 //*** Test Entity
 
 import { Column, PrimaryGeneratedColumn, Entity, OneToOne, ManyToMany, JoinTable, OneToMany } from "typeorm"
-import { Report } from "./Report";
 import { TestGroup } from "./TestGroup";
 import { TestTimestamp } from "./TestTimestamp";
 
@@ -30,7 +29,7 @@ export class Test {
     testName!: string;
 
     @Column("text", { nullable: true })
-    filePath: string | undefined;
+    filePath!: string | null;
 
     @OneToOne(() => TestTimestamp, (timestamp) => timestamp.test, {
         cascade: true,
@@ -42,9 +41,4 @@ export class Test {
     })
     @JoinTable()
     groups!: TestGroup[];
-
-    @OneToMany(() => Report, (report) => report.test, {
-        cascade: true,
-    })
-    reports!: Report[];
 }

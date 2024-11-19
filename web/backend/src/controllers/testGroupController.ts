@@ -18,7 +18,7 @@ router.get("/test-groups/:id?", async (req: Request, res: Response) => {
         // Return specific group if Id provided
         if (id) {
             const testGroup = await repo.findOne({
-                where: { TestGroupID: parseInt(id) },
+                where: { testGroupId: parseInt(id) },
                 relations: ["tests"],
             });
 
@@ -28,7 +28,7 @@ router.get("/test-groups/:id?", async (req: Request, res: Response) => {
             }
 
             const response = {
-                testGroupId: testGroup.TestGroupID,
+                testGroupId: testGroup.testGroupId,
                 testIds: testGroup.tests.map(test => test.testId), // map test -> id's to save memory & speed
             };
 
@@ -43,7 +43,7 @@ router.get("/test-groups/:id?", async (req: Request, res: Response) => {
 
         // Same mapping as before
         const response = testGroups.map(group => ({
-            testGroupId: group.TestGroupID,
+            testGroupId: group.testGroupId,
             testIds: group.tests.map(test => test.testId),
         }));
 

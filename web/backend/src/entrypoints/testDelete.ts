@@ -16,7 +16,7 @@ router.delete("/test/:id", async (req: Request, res: Response) => {
         const repo = AppDataSource.getRepository(Test);
         const existingTest = await repo.findOne({
             where: {testId: parseInt(id) },
-            relations: ["groups", "timestamp", "reports"],
+            relations: ["groups", "timestamp"],
         });
 
         if (!existingTest) {

@@ -17,13 +17,13 @@ const router = Router();
 router.put("test/:id", async (req: Request, res: Response) => {
     // setup
     const { id } = req.params;
-    const { fileName, testName, filePath, groups, timestamp, reports } = req.body;
+    const { fileName, testName, filePath, groups, timestamp} = req.body;
 
     try {
         const repo = AppDataSource.getRepository(Test);
         const existingTest = await repo.findOne({
             where: { testId: parseInt(id) },
-            relations: ["groups", "timestamp", "reports"],
+            relations: ["groups", "timestamp"],
         });
 
         // Confirm Test is not null
@@ -39,7 +39,6 @@ router.put("test/:id", async (req: Request, res: Response) => {
 
         if (groups) existingTest.groups = groups;
         if (timestamp) existingTest.timestamp = timestamp;
-        if (reports) existingTest.reports = reports;
 
         const finalTest = await repo.save(existingTest);
         res.json(finalTest);

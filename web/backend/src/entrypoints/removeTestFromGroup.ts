@@ -20,7 +20,7 @@ router.delete("/test-groups/:testGroupId/tests/:testId", async (req: Request, re
         // Load vars from DB
         // free me from this boiler plate hell
         const testGroup = await testGroupRepo.findOne({
-            where: { TestGroupID: parseInt(testGroupId) },
+            where: { testGroupId: parseInt(testGroupId) },
             relations: ["tests"],
         });
         const test = await testRepo.findOne({
@@ -44,7 +44,7 @@ router.delete("/test-groups/:testGroupId/tests/:testId", async (req: Request, re
 
         // Return updated test group
         const response = {
-            testGroupId: testGroup.TestGroupID,
+            testGroupId: testGroup.testGroupId,
             testIds: testGroup.tests.map(t => t.testId),
         };
 

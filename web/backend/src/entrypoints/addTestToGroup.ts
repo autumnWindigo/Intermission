@@ -21,7 +21,7 @@ router.post("/test-groups/:testGroupId/tests/:testId", async (req: Request, res:
 
         // Load vars from DB
         const testGroup = await testGroupRepo.findOne({
-            where: { TestGroupID: parseInt(testGroupId) },
+            where: { testGroupId: parseInt(testGroupId) },
             relations: ["tests"],
         });
         const test = await testRepo.findOne({
@@ -48,7 +48,7 @@ router.post("/test-groups/:testGroupId/tests/:testId", async (req: Request, res:
 
         // Return updated test group
           const response = {
-            testGroupId: testGroup.TestGroupID,
+            testGroupId: testGroup.testGroupId,
             testIds: testGroup.tests.map(t => t.testId),
         };
 

@@ -7,10 +7,10 @@ import "reflect-metadata";
 import "dotenv/config";
 
 import { DataSource } from "typeorm";
-import { Report } from "./entity/Report";
 import { Test } from "./entity/Test";
 import { TestGroup } from "./entity/TestGroup";
 import { TestTimestamp } from "./entity/TestTimestamp";
+import { TestResult } from "./entity/TestResult";
 
 export const AppDataSource = new DataSource({
     type: "mariadb",
@@ -18,7 +18,7 @@ export const AppDataSource = new DataSource({
     port: 3306,
     database: process.env.DB_NAME,
     username: process.env.DB_USER,
-    entities: [Test, TestGroup, TestTimestamp, Report],
+    entities: [Test, TestGroup, TestTimestamp, TestResult],
     subscribers: [],
     migrations: [],
     synchronize: true,

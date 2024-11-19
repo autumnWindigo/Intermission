@@ -3,7 +3,7 @@
 //*** December 5
 //*** TestTimestamp Entity
 
-import { Column, PrimaryGeneratedColumn, Entity, OneToOne, JoinColumn } from "typeorm"
+import { Column, PrimaryGeneratedColumn, Entity, OneToOne, JoinColumn, CreateDateColumn } from "typeorm"
 import { Test } from "./Test"
 
 @Entity()
@@ -11,17 +11,17 @@ export class TestTimestamp {
     @PrimaryGeneratedColumn()
     testTimestampID!: number;
 
-    @Column("text")
-    firstAdded!: string;
+    @CreateDateColumn()
+    firstAdded!: Date;
 
     @Column("text", { nullable: true })
-    lastRun: string | undefined;
+    lastRun!: string | null;
 
     @Column("text", { nullable: true })
-    lastUpdated: string | undefined;
+    lastUpdated!: string | null;
 
     @Column("text", { nullable: true})
-    lastFailed: string | undefined;
+    lastFailed!: string | null;
 
     @OneToOne(() => Test, test => test.timestamp)
     @JoinColumn()

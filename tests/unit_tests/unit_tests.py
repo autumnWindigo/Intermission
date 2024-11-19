@@ -32,6 +32,7 @@ class TestWeb(TestBundle):
         await page.set_extra_http_headers(headers=context.basic_auth.headers)
         await page.goto(context.web_address)
         url: str = page.url
+        assert False
         assert url == context.web_address_answer
 
     async def bundle_test_concurrency(page: Page, context: Context):
