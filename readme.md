@@ -18,9 +18,9 @@ pip install -r requirements.txt
 ### Install Node Packages
 ```
 cd web
-node i -s
+npm i -s
 cd backend
-node i -s
+npm i -s
 cd ../frontend
-node i -s
+npm i -s
 ```
