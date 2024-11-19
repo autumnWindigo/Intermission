@@ -3,9 +3,15 @@
 
 ## Setup
 It's a pain for now sorry!
+### Clone and Enter Directory
+```
+git clone https://github.com/autumnWindigo/Intermission
+cd intermission
+```
 ### Install Python Packages
 ```
 python -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
 pip install -e .
 ```
