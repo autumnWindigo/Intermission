@@ -60,6 +60,8 @@ export async function runPytestForTestGroup(groupId: number): Promise<TestResult
             need to write regex to match the ',' and 'u' between '.'
             to count amount of passed and failed tests
 
+            \.[u,\,]*\. <- something like this
+
             (in case of skip I want to explicitly count failed)
             */
 

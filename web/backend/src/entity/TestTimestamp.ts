@@ -17,12 +17,6 @@ export class TestTimestamp {
     @Column("text", { nullable: true })
     lastRun!: string | null;
 
-    @Column("text", { nullable: true })
-    lastUpdated!: string | null;
-
-    @Column("text", { nullable: true})
-    lastFailed!: string | null;
-
     @OneToOne(() => Test, test => test.timestamp)
     @JoinColumn()
     test!: Test

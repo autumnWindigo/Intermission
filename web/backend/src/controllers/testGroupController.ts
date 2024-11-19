@@ -9,7 +9,7 @@ import { TestGroup } from "../entity/TestGroup";
 
 const router = Router();
 
-router.get("/test-groups/:id?", async (req: Request, res: Response) => {
+router.get("/test-group/:id?", async (req: Request, res: Response) => {
     const { id } = req.params;
 
     try {

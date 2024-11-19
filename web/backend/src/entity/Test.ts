@@ -3,7 +3,7 @@
 //*** December 5
 //*** Test Entity
 
-import { Column, PrimaryGeneratedColumn, Entity, OneToOne, ManyToMany, JoinTable, OneToMany } from "typeorm"
+import { Column, PrimaryGeneratedColumn, Entity, OneToOne, ManyToMany, JoinTable } from "typeorm"
 import { TestGroup } from "./TestGroup";
 import { TestTimestamp } from "./TestTimestamp";
 

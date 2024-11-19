@@ -11,7 +11,7 @@ import { Test } from "../entity/Test";
 const router = Router();
 
 // Add test to test group
-router.post("/test-groups/:testGroupId/tests/:testId", async (req: Request, res: Response) => {
+router.post("/test-group/:testGroupId/tests/:testId", async (req: Request, res: Response) => {
     const { testGroupId, testId } = req.params;
 
     try {

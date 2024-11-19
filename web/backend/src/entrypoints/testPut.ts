@@ -41,7 +41,7 @@ router.put("test/:id", async (req: Request, res: Response) => {
         if (timestamp) existingTest.timestamp = timestamp;
 
         const finalTest = await repo.save(existingTest);
-        res.json(finalTest);
+        res.status(200).json(finalTest);
     } catch (error) {
         console.error("Error updating test:", error);
         res.status(500).json({ error: "Error updating test" })
