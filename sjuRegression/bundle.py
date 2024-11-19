@@ -99,8 +99,9 @@ class TestBundle:
             TypeError: If no valid tests are found
         """
         try:
+            ignoredTests = [currentframe().f_code.co_name]
             functions: Iterable[str] = self.find_tests(
-                currentframe().f_code.co_name, self.TEST_PATTERN)
+                ignoredTests, self.TEST_PATTERN)
             # Tuple[0] -> str name of function
             # tuple[1] -> Page from playwright
             queue: asyncio.Queue[tuple] = asyncio.Queue()
