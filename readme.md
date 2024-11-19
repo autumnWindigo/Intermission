@@ -6,7 +6,7 @@ It's a pain for now sorry!
 ### Install Python Packages
 ```
 python -m venv venv
-pip install -r requirements
+pip install -r requirements.txt
 pip install -e .
 ```
 
