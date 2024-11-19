@@ -49,6 +49,7 @@ class TestBundle:
 
     def find_tests(
             self, ignored_names: list[str],
+            allowed_names: list[str],
             pattern: Pattern) -> Generator[str, None, None]:
         """Finds and bundles subtests within a test class based on TEST_PATTERN
 
@@ -63,7 +64,9 @@ class TestBundle:
         for func in [f for f in dir(self.__class__)
                      if not f.startswith('__')
                      and callable(getattr(self.__class__, f))]:
-            if func in ignored_names:
+            if func in ignored_names or (
+                    allowed_names is not None
+                    and func not in allowed_names):
                 continue
             if search(self.TEST_PATTERN, func):
                 yield func
@@ -89,7 +92,7 @@ class TestBundle:
             # Iter queue
             queue.task_done()
 
-    async def tests(self, subtests: SubTests) -> None:
+    async def tests(self, subtests: SubTests, allow: str) -> None:
         """Test runner (Pretend this is main!)
 
         Args:
@@ -100,8 +103,13 @@ class TestBundle:
         """
         try:
             ignoredTests = [currentframe().f_code.co_name]
+            allowedTests = None
+
+            if allow is not None:
+                allowedTests = allow.split(',')
+
             functions: Iterable[str] = self.find_tests(
-                ignoredTests, self.TEST_PATTERN)
+                ignoredTests, allowedTests, self.TEST_PATTERN)
             # Tuple[0] -> str name of function
             # tuple[1] -> Page from playwright
             queue: asyncio.Queue[tuple] = asyncio.Queue()
