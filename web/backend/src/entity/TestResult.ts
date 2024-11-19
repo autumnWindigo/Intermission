@@ -1,3 +1,8 @@
+//*** Andrew Kantner
+//*** Database Management Systems
+//*** December 5
+//*** TestResult Entity
+
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne } from "typeorm";
 import { TestGroup } from "./TestGroup";
 

@@ -1,3 +1,8 @@
+//*** Andrew Kantner
+//*** Database Management Systems
+//*** December 5
+//*** Scheduler for cron jobs
+
 import cron from "node-cron";
 import { AppDataSource } from "./data-source";
 import { TestGroup } from "./entity/TestGroup";

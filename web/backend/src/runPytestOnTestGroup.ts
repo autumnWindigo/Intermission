@@ -1,3 +1,8 @@
+//*** Andrew Kantner
+//*** Database Management Systems
+//*** December 5
+//*** Runs pytest for all tests in group when groupId is passed
+
 import { AppDataSource } from "./data-source";
 import { spawn } from "child_process";
 import { TestResult } from "./entity/TestResult";

@@ -50,33 +50,3 @@ app.use("/api", testGroupPut); // PUT (/test-group/:id)
 app.listen(PORT, () => {
     console.log(`Running on port: ${PORT}`);
 });
-
-// ============================
-// Ignore below
-// ============================
-
-// Make an example test if we need
-
-// import { Test } from './entity/Test';
-// import { TestGroup } from "./entity/TestGroup";
-// import { TestTimestamp } from "./entity/TestTimestamp";
-
-// const test: Test = new Test()
-// const timestamp: TestTimestamp = new TestTimestamp()
-// const group: TestGroup = new TestGroup()
-// const report: Report = new Report()
-//
-// test.groups = [group]
-// test.reports = [report]
-// test.timestamp = timestamp
-// test.fileName = "fileNameTest"
-// test.filePath = "testFilePath"
-// test.testName = "testNameTest"
-//
-// timestamp.lastRun = "lastrun time"
-// timestamp.firstAdded = "firstadd time"
-//
-// group.name = "My Group Name"
-//
-// report.pass = true
-// report.timestamp = "pretend it's a time"
