@@ -20,6 +20,7 @@ import testGroupController from "./controllers/testGroupController";
 import addTestTogroup from "./entrypoints/addTestToGroup";
 import testGroupPost from "./entrypoints/testGroupPost";
 import testGroupPut from "./entrypoints/testGroupPut";
+import { createDevEntities } from "./entity/createDevEntities";
 
 const app = express();
 const PORT = 8000;
@@ -32,6 +33,7 @@ app.use(bodyParser.json());
 AppDataSource.initialize()
     .then(async () => {
         console.log("DB Innitialized")
+        await createDevEntities();
     }).catch((error: any) => console.log("Error during DS init:", error));
 
 // Insert routers for Tests
@@ -45,6 +47,7 @@ app.use("/api", testGroupController); // GET (/test-group/:id?)
 app.use("/api", addTestTogroup); // POST (/test-group/:testGroupId/tests/:testId)
 app.use("/api", testGroupPost); // POST (/test-group)
 app.use("/api", testGroupPut); // PUT (/test-group/:id)
+
 
 // Run Server
 app.listen(PORT, () => {

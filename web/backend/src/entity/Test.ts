@@ -36,9 +36,7 @@ export class Test {
     })
     timestamp!: TestTimestamp;
 
-    @ManyToMany(() => TestGroup, (group) => group.tests, {
-        cascade: true,
-    })
+    @ManyToMany(() => TestGroup, (group) => group.tests)
     @JoinTable()
     groups!: TestGroup[];
 }
