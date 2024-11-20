@@ -17,7 +17,7 @@ const TestGroupDetails: React.FC<TestGroupDetailsProps> = ({
                     {/* If valid tests, list them */}
                     {group.tests.map((test) => (
                         <li key={test.testId}>
-                            {test.testName} ({test.testName})
+                            {test.testName} ({test.filePath})
                         </li>
                     ))}
                 </ul>
