@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import cron from 'cron-validator';
+import * as cron from 'cron-validator';
 import api from "../api";
 
 interface EditTestGroupModalProps {
