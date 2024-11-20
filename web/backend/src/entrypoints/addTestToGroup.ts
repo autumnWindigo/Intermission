@@ -1,18 +1,20 @@
 //*** Andrew Kantner
 //*** Database Management Systems
 //*** December 5
-//*** Add new test to test group
+//*** Add new tests to test group
 
 import { Router, Request, Response } from "express";
 import { AppDataSource } from "../data-source";
 import { TestGroup } from "../entity/TestGroup";
 import { Test } from "../entity/Test";
+import { In } from "typeorm";
 
 const router = Router();
 
 // Add test to test group
-router.post("/test-group/:testGroupId/tests/:testId", async (req: Request, res: Response) => {
-    const { testGroupId, testId } = req.params;
+router.post("/test-group/:id/add-tests", async (req: Request, res: Response) => {
+    const testGroupId = req.params.id;
+    const { testIds } = req.body;
 
     try {
         // Load DB
@@ -24,27 +26,36 @@ router.post("/test-group/:testGroupId/tests/:testId", async (req: Request, res: 
             where: { testGroupId: parseInt(testGroupId) },
             relations: ["tests"],
         });
-        const test = await testRepo.findOne({
-            where: { testId: parseInt(testId) },
-        });
 
         // If not found, early return
         if (!testGroup) {
             res.status(404).json({ error: "Test group not found" });
             return;
-        } else if (!test) {
-            res.status(404).json({ error: "Test not found" });
-            return
         }
 
-        // Confirm it doesn't exist in array
-        if (!testGroup.tests.find(t => t.testId === test.testId)) {
-            // Add test
-            testGroup.tests.push(test);
+        // Gather selected tests
+        const testsToAdd = await testRepo.findBy({
+            testId: In(testIds)
+        });
+
+        // Verify all are valid tests
+        if (testsToAdd.length !== testIds.length) {
+            res.status(404).json({ error: 'One or more testIds are invalid.' });
+            return;
         }
 
-        // Update DB
-        await testGroupRepo.save(testGroup)
+        // Check for duplicates
+        const existingTestIds = testGroup.tests.map((test) => test.testId);
+        const duplicateTestIds = testsToAdd.filter((test) => existingTestIds.includes(test.testId));
+
+        if (duplicateTestIds.length > 0) {
+            // I don't think there's a matching status code for this so throw error
+            throw new Error(`Duplicate tests detected: ${duplicateTestIds.map((test) => test.testId).join(', ')}`);
+        }
+
+        // Add tests to group
+        testGroup.tests = [...testGroup.tests, ...testsToAdd];
+        await testGroupRepo.manager.save(testGroup);
 
         // Return updated test group
           const response = {
@@ -57,7 +68,6 @@ router.post("/test-group/:testGroupId/tests/:testId", async (req: Request, res: 
         console.error("Failed to add test to group:", error);
         res.status(500).json({ error: "Failed to add test to group" });
     }
-
 });
 
 export default router;
