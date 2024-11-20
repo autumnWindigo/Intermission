@@ -5,7 +5,7 @@ import { scheduleTestGroupJob } from "../scheduler";
 
 const router = Router();
 
-router.put("test-group/:id", async (req: Request, res: Response) => {
+router.put("/:id", async (req: Request, res: Response) => {
     const { id } = req.params;
     const { name, schedule, results } = req.body;
 

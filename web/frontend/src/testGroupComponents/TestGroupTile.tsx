@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import { TestGroup } from "./types";
+import TestGroupDetails from "./TestGroupDetails";
+import TestAddToGroupModal from "./TestAddToGroupModal";
+import EditTestGroupModal from "./EditTestGroupModal";
+import api from "../api";
 
 interface TestGroupTileProps {
     // TestGroup from backend
@@ -9,47 +12,88 @@ interface TestGroupTileProps {
     onUpdate: (updatedGroup: TestGroup) => void;
 };
 
-/*
-TODO:   Add jsx to return
-        Create function for adding new testGroup (make default then user edits)
-            This should be in main app & be like a + button in the top
-
-        Add parent object to hold TestGroupTile's in the main
-        Parent test should be some kinda dashboard. We should have other menu's
-        other than JUST test groups. Just makes sense to do this first.
-        Map DB TestGroup's to the parent object
-*/
-
-
 const TestGroupTile: React.FC<TestGroupTileProps> = ({ group, onUpdate }) => {
     // Our States! Only adding test uses the modal, not editing them
-    const [isEditing, setIsEditing] = useState(false); // If editing testGroupTile (will update testGroup)
-    const [expanded, setExpanded] = useState(false); // If expanded to show all tests & results
-    const [isModalOpen, setIsModalOpen] = useState(false); // If modal open duh
-    const [availableTests, setAvailableTests] = useState([]); // List of tests to select
-    const [selectedTests, setSelectedTests] = useState([]); // List of tests to add
+    const [isExpanded, setIsExpanded] = useState(false); // If expanded to show all tests & results
+    const [isAddModalOpen, setIsAddModalOpen] = useState(false); // If modal open duh
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false); // If modal open duh
 
-    // Create useEffect to grab tests from API when modal is opened
-    // useEffect(setup, dependencies?)
-    // isModalOpened is the dependency, stops API calls when not needed
-    useEffect(() => {
-        if (isModalOpen) {
-            // /test without ID returns all
-            axios.get("/test").then((res) => {
-                setAvailableTests(res.data);
+    // Pass into AddTestModal
+    const handleAddTests = (selectedTestIds: number[]) => {
+        api
+            .post(`/api/test-group/${group.testGroupId}/add-tests`, { testIds: selectedTestIds })
+            .then((response) => {
+                const updatedGroup = response.data;
+                // Notify parent of changes
+                onUpdate(updatedGroup);
+            })
+            .catch((error) => {
+                console.error("Error adding tests:", error);
             });
-        }
-    }, [isModalOpen]); // dependency: modal is open
+    };
 
+    const handleEditSave = (updatedGroup: { name: string; schedule: string | null }) => {
+        // Pass group info to Edit Modal
+        // Too much code to have here
+        onUpdate({ ...group, ...updatedGroup });
+    };
 
+    const toggleExpansion = () => {
+        setIsExpanded((prev) => !prev);
+    }
 
     // Tile which holds...
     // TestGroup information
     // Drop down for tests & results
-    // Button for editing
+    // Button for editing (through modal)
     // Button for adding tests (through modal)
     return (
-    <div> </div>
+        <div>
+            {/* Format for Group Tile:
+                Name : static string
+                Schedule : static string
+                Tests & results: button that expands tile to show all test & results for group
+                Add Tests: button to open modal to add tests
+                Edit Group: button to open modal to edit TestGroup in DB
+
+                TODO TODO TODO
+                    Run Tests: button to run test group and return results in modal
+            */}
+            <h3>{group.name}</h3>
+            <p>
+                schedule: {group.schedule || "Not Set"}
+            </p>
+            <button onClick={toggleExpansion}>
+                {isExpanded ? "Collapse" : "Expand"}
+            </button>
+            <button onClick={() => setIsAddModalOpen(true)}>
+                Add Tests
+            </button>
+            <button onClick={() => setIsEditModalOpen(true)}>
+                Edit Group
+            </button>
+
+            {/*
+                Only show details if expanded
+                because there can be a LOT of details after time
+            */}
+            {isExpanded && <TestGroupDetails group={group} />}
+
+            <TestAddToGroupModal
+                isOpen={isAddModalOpen}
+                onClose={() => setIsAddModalOpen(false)}
+                onAddTests={handleAddTests}
+            />
+
+            <EditTestGroupModal
+                isOpen={isEditModalOpen}
+                onClose={() => setIsEditModalOpen(false)}
+                testGroupId={group.testGroupId}
+                currentName={group.name}
+                currentSchedule={group.schedule}
+                onSave={handleEditSave}
+            />
+        </div>
     )
 };
 

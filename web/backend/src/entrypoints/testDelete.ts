@@ -9,7 +9,7 @@ import { Test } from "../entity/Test";
 
 const router = Router();
 
-router.delete("/test/:id", async (req: Request, res: Response) => {
+router.delete("/:id", async (req: Request, res: Response) => {
     const { id } = req.params;
 
     try {

@@ -10,7 +10,7 @@ import { TestGroup } from "../entity/TestGroup";
 const router = Router()
 
 // Tests own test groups. Add tests to group through them.
-router.post("/test-group", async (req: Request, res: Response) => {
+router.post("/", async (req: Request, res: Response) => {
     const { name, schedule, results } = req.body;
 
     try {

@@ -10,7 +10,7 @@ import { Test } from "../entity/Test";
 
 const router = Router();
 
-router.delete("/test-group/:testGroupId/tests/:testId", async (req: Request, res: Response) => {
+router.delete("/", async (req: Request, res: Response) => {
     const { testGroupId, testId } = req.params;
 
     try {
@@ -53,5 +53,6 @@ router.delete("/test-group/:testGroupId/tests/:testId", async (req: Request, res
         console.error("Failed to delete test from group:", error);
         res.status(500).json({ error: "Failed to delete test from group" });
     }
-
 });
+
+export default router;

@@ -12,7 +12,7 @@ import { In } from "typeorm";
 const router = Router();
 
 // Add test to test group
-router.post("/test-group/:id/add-tests", async (req: Request, res: Response) => {
+router.post("/:id/add-tests", async (req: Request, res: Response) => {
     const testGroupId = req.params.id;
     const { testIds } = req.body;
 

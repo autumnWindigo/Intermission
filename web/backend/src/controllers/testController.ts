@@ -9,16 +9,21 @@ import { Test } from "../entity/Test";
 
 const router = Router();
 
-router.get("/test/:id?", async (req: Request<{ id: string }>, res: Response): Promise<void> => {
+router.get("/:id?", async (req: Request<{ id: string }>, res: Response): Promise<void> => {
     const { id } = req.params;
 
     try {
         const repo = AppDataSource.getRepository(Test);
 
         if (id) {
+            const parsedId = parseInt(id, 10);
             // Find test by ID
+            if (isNaN(parsedId)) {
+                res.status(400).json({ error: "Invalid Test ID" });
+                return;
+            }
             const test = await repo.findOne({
-                where: { testId: parseInt(id) },
+                where: { testId: parsedId },
                 relations: ["groups", "timestamp"],
             });
 

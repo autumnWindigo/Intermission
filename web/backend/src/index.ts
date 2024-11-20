@@ -37,16 +37,18 @@ AppDataSource.initialize()
     }).catch((error: any) => console.log("Error during DS init:", error));
 
 // Insert routers for Tests
-app.use("/api", testController); // GET (/test:/id)
-app.use("/api", testPost); // POST (/test)
-app.use("/api", testPut); // PUT (/test/:id)
-app.use("/api", testDelete); // DELETE (/test/:id)
+app.use("/api/test", testController); // GET (/test:/id?)
+app.use("/api/test", testPost); // POST (/test)
+app.use("/api/test", testPut); // PUT (/test/:id)
+app.use("/api/test", testDelete); // DELETE (/test/:id)
 
 // Insert routers for Test Groups
-app.use("/api", testGroupController); // GET (/test-group/:id?)
-app.use("/api", addTestTogroup); // POST (/test-group/:testGroupId/tests/:testId)
-app.use("/api", testGroupPost); // POST (/test-group)
-app.use("/api", testGroupPut); // PUT (/test-group/:id)
+app.use("/api/test-group", testGroupController); // GET (/test-group/:id?)
+app.use("/api/test-group", addTestTogroup); // POST (/test-group/:id/add-tests)
+app.use("/api/test-group", testGroupPost); // POST (/test-group)
+app.use("/api/test-group", testGroupPut); // PUT (/test-group/:id)
+
+// I need to rewrite remove tests from group
 
 
 // Run Server

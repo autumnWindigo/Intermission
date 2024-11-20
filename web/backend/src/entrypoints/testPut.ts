@@ -14,7 +14,7 @@ function isTest(test: Test | null): test is Test {
 
 const router = Router();
 
-router.put("test/:id", async (req: Request, res: Response) => {
+router.put("/:id", async (req: Request, res: Response) => {
     // setup
     const { id } = req.params;
     const { fileName, testName, filePath, groups, timestamp} = req.body;
