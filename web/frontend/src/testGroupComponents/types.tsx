@@ -1,3 +1,7 @@
+//*** Andrew Kantner
+//*** Database Management Systems
+//*** December 5
+//*** VVV
 // Tests for use in TestGroupTile
 // They're the same as in the DB without these typescript might get feisty
 // Gotta make the compiler happy :3

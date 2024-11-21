@@ -1,3 +1,8 @@
+//*** Andrew Kantner
+//*** Database Management Systems
+//*** December 5
+//*** Part of test group tile. More detailed info.
+
 import React from "react";
 import { TestGroup } from "./types";
 
@@ -9,15 +14,19 @@ const TestGroupDetails: React.FC<TestGroupDetailsProps> = ({
     group
 }) => {
     return (
-        <div>
+        <div className="test-group-details">
             <h4>Tests</h4>
             {/* List valid tests in group */}
+            <div className="test-group-test-list">
             {group.tests.length > 0 ? (
                 <ul>
                     {/* If valid tests, list them */}
                     {group.tests.map((test) => (
                         <li key={test.testId}>
-                            {test.testName} ({test.filePath})
+                            {test.testName}
+                            <div className="test-path">
+                                ({test.filePath})
+                            </div>
                         </li>
                     ))}
                 </ul>
@@ -25,6 +34,7 @@ const TestGroupDetails: React.FC<TestGroupDetailsProps> = ({
                 // Message if no valid tests in group
                 <p>No tests in Group</p>
             )}
+            </div>
 
             <h4>Results</h4>
             {/* List results */}

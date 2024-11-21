@@ -1,3 +1,8 @@
+//*** Andrew Kantner
+//*** Database Management Systems
+//*** December 5
+//*** Modal for editing existing test groups
+
 import React, { useState } from "react";
 import * as cron from 'cron-validator';
 import api from "../api";
