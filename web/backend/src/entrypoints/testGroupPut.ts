@@ -7,7 +7,8 @@ const router = Router();
 
 router.put("/:id", async (req: Request, res: Response) => {
     const { id } = req.params;
-    const { name, schedule, results } = req.body;
+    const { name, schedule } = req.body;
+    console.log("ID:", id, "body:", name, schedule);
 
     try {
         const repo = AppDataSource.getRepository(TestGroup)
@@ -25,7 +26,6 @@ router.put("/:id", async (req: Request, res: Response) => {
         //update schedule
         // We can only update cron job AFTER the new test group is saved
         if (schedule) existingTestGroup.schedule = schedule;
-        if (results) existingTestGroup.results = results;
 
         const finalTestGroup = await repo.save(existingTestGroup);
 

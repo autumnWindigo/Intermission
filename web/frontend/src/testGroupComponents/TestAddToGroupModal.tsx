@@ -76,12 +76,14 @@ const TestAddToGroupModal: React.FC<TestAddToGroupModalProps> = ({
 
     return (
         <>
-            <div className="modal-overlay" onClick={onClose}>
+            <div className="modal-overlay" onClick={ () => {
+            setSelectedTestIds([]);
+            onClose();
+            }}>
             <div className="modal" onClick={handleModalClick}>
                 <div className="modal-content">
                     {/* Headers and Buttons of Modal */}
                     <h4>Select Tests To Add</h4>
-                    <button onClick={onClose}>Close</button>
                     <input
                         className="search-bar"
                         type="text"
