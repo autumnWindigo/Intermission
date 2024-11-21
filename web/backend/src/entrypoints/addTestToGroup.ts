@@ -22,9 +22,9 @@ router.post("/:id/add-tests", async (req: Request, res: Response) => {
         const testRepo = AppDataSource.getRepository(Test);
 
         // Load vars from DB
-        const testGroup = await testGroupRepo.findOne({
+        const testGroup: TestGroup | null = await testGroupRepo.findOne({
             where: { testGroupId: parseInt(testGroupId) },
-            relations: ["tests"],
+            relations: ["tests", "results"],
         });
 
         // If not found, early return
@@ -58,12 +58,7 @@ router.post("/:id/add-tests", async (req: Request, res: Response) => {
         await testGroupRepo.manager.save(testGroup);
 
         // Return updated test group
-          const response = {
-            testGroupId: testGroup.testGroupId,
-            testIds: testGroup.tests.map(t => t.testId),
-        };
-
-        res.status(200).json(response);
+        res.status(200).json(testGroup);
     } catch (error) {
         console.error("Failed to add test to group:", error);
         res.status(500).json({ error: "Failed to add test to group" });

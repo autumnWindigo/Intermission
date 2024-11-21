@@ -7,6 +7,7 @@ import React, { useState } from "react";
 import { TestGroup } from "./types";
 import TestGroupDetails from "./TestGroupDetails";
 import * as cronstrue from "cronstrue";
+import testRunApi from "../testRunApi";
 
 interface TestGroupTileProps {
     // TestGroup from backend
@@ -14,13 +15,29 @@ interface TestGroupTileProps {
     // Pass callback function into Tile to update testGroup
     onAddTests: () => void;
     onEditGroup: () => void;
+    onUpdateGroup: (updatedGroup: TestGroup) => void;
 };
 
-const TestGroupTile: React.FC<TestGroupTileProps> = ({ group, onAddTests, onEditGroup }) => {
+const TestGroupTile: React.FC<TestGroupTileProps> = ({ group, onAddTests, onEditGroup, onUpdateGroup }) => {
     const [isExpanded, setIsExpanded] = useState(false); // If expanded to show all tests & results
+    const [isTestRunning, setIsTestRunning] = useState(false);
 
     const toggleExpansion = () => {
         setIsExpanded((prev) => !prev);
+    }
+
+    const handleRunTests = () => {
+        setIsTestRunning(true);
+        testRunApi
+            .post(`/api/test-group/${group.testGroupId}/run-tests`)
+            .then((response) => {
+                console.log("Completed test updating group:", response)
+                onUpdateGroup(response.data)
+            })
+            .catch((error) => {
+                console.error("Error running tests:", error);
+            })
+            .finally(() => { setIsTestRunning(false) });
     }
 
     return (
@@ -37,13 +54,16 @@ const TestGroupTile: React.FC<TestGroupTileProps> = ({ group, onAddTests, onEdit
             */}
             <h3>{group.name}</h3>
             <p>
-                { (group.schedule !== null && cronstrue.toString(group.schedule)) || "Schedule Not Set"}
+                {(group.schedule !== null && cronstrue.toString(group.schedule)) || "Schedule Not Set"}
             </p>
             <button onClick={toggleExpansion}>
                 {isExpanded ? "Collapse" : "Expand"}
             </button>
             <button onClick={onAddTests}>Add Tests</button>
             <button onClick={onEditGroup}>Edit Group</button>
+            <button onClick={handleRunTests} disabled={isTestRunning}>
+                {isTestRunning ? "Running..." : "Run Tests" }
+            </button>
 
             {/*
                 Only show details if expanded

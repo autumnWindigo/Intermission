@@ -7,15 +7,17 @@ import { AppDataSource } from "./data-source";
 import { spawn } from "child_process";
 import { TestResult } from "./entity/TestResult";
 import { TestGroup } from "./entity/TestGroup";
+import path from "path";
+import "dotenv/config";
 
-export async function runPytestForTestGroup(groupId: number): Promise<TestResult> {
+export async function runPytestForTestGroup(groupId: number): Promise<TestGroup> {
     const testGroupRepository = AppDataSource.getRepository(TestGroup);
     const testResultRepository = AppDataSource.getRepository(TestResult);
 
     // Fetch the TestGroup along with its associated tests
     const testGroup = await testGroupRepository.findOne({
         where: { testGroupId: groupId },
-        relations: ["tests"],
+        relations: ["tests", "results"],
     });
 
     if (!testGroup) {
@@ -38,12 +40,18 @@ export async function runPytestForTestGroup(groupId: number): Promise<TestResult
     //   pytest path1 path2 --allow test1,test2,test3
     const command = "pytest";
     const args = [...filePaths, "--allow", testGroup.tests.map((t) => t.testName).join(",")];
+    const pythonExecutable = process.env.PYTHON_EXEC || "";
 
+    if (pythonExecutable === ""){
+        throw new Error("PYTHON_EXEC not set or found");
+    }
     // Run pytest
     // We need a promise so it doesn't stop the site for 20
     // years when we run multiple tests (async my beloved)
     return new Promise((resolve, reject) => {
-        const pytest = spawn(command, args);
+        const pytest = spawn(command, args, {
+        env: {...process.env, PATH: path.dirname(pythonExecutable)}
+        });
 
         let stdout = "";
         let stderr = "";
@@ -90,9 +98,9 @@ export async function runPytestForTestGroup(groupId: number): Promise<TestResult
                 // Spread results (if none have empty array) + new result
                 testGroup.results = [...(testGroup.results || []), savedResult];
                 // Finally really save (for real) to DB
-                await testGroupRepository.save(testGroup);
+                const savedGroup = await testGroupRepository.save(testGroup);
 
-                resolve(savedResult);
+                resolve(savedGroup);
             } catch (error) {
                 // Should not reach here
                 // can't add failure clause because DB error

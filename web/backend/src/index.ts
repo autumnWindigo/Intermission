@@ -20,6 +20,9 @@ import testGroupController from "./controllers/testGroupController";
 import addTestTogroup from "./entrypoints/addTestToGroup";
 import testGroupPost from "./entrypoints/testGroupPost";
 import testGroupPut from "./entrypoints/testGroupPut";
+
+import runGroupTests from "./entrypoints/runGroupTests";
+
 // import { createDevEntities } from "./entity/createDevEntities";
 
 const app = express();
@@ -47,9 +50,9 @@ app.use("/api/test-group", testGroupController); // GET (/test-group/:id?)
 app.use("/api/test-group", addTestTogroup); // POST (/test-group/:id/add-tests)
 app.use("/api/test-group", testGroupPost); // POST (/test-group)
 app.use("/api/test-group", testGroupPut); // PUT (/test-group/:id)
+app.use("/api/test-group", runGroupTests); // Post (/:id/run-tests)
 
 // I need to rewrite remove tests from group
-
 
 // Run Server
 app.listen(PORT, () => {

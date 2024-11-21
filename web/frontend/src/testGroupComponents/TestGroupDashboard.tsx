@@ -27,6 +27,18 @@ const TestGroupDashboard: React.FC = () => {
             })
     }, []); // Empty array only runs on first render
 
+    // Update group objects which were passed to the tiles
+    // Updates on DB changes in handlers
+    const updateGroup = (updatedGroup: TestGroup) => {
+        setTestGroups((prevGroups) =>
+            prevGroups.map((group) =>
+                group.testGroupId === updatedGroup.testGroupId
+                    ? { ...group, ...updatedGroup, results: updatedGroup.results || [] }
+                    : group
+            )
+        );
+    };
+
 
     // On update run through the array
     // If we hit an updated test group then replace old with updated
@@ -34,11 +46,14 @@ const TestGroupDashboard: React.FC = () => {
     const handleEditTest = (
         updatedGroup: { testGroupId: number, name: string, schedule: string | null }) => {
         if (currentGroup === null) return;
-        console.log("Adding:", updatedGroup, "group:", currentGroup.testGroupId);
         // Update Group in DB
         api
             .put(`/api/test-group/${currentGroup.testGroupId}`,
                 { name: updatedGroup.name, schedule: updatedGroup.schedule })
+            .then((response) => {
+                console.log(`Updated group:`, response.data);
+                updateGroup(response.data);
+            })
             .catch((error) => {
                 console.error("Error updateing test group:", error);
             });
@@ -53,6 +68,7 @@ const TestGroupDashboard: React.FC = () => {
             .post(`/api/test-group/${currentGroup.testGroupId}/add-tests`, { testIds: selectedTestIds })
             .then((response) => {
                 console.log(`Updated group:`, response.data);
+                updateGroup(response.data)
             })
             .catch((error) => {
                 console.error("Error adding tests:", error);
@@ -71,6 +87,7 @@ const TestGroupDashboard: React.FC = () => {
                         <TestGroupTile
                             key={group.testGroupId}
                             group={group}
+                            onUpdateGroup={updateGroup}
                             onAddTests={() => {
                                 setCurrentGroup(group);
                                 setIsAddModalOpen(true);

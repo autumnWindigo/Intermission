@@ -76,49 +76,49 @@ const TestAddToGroupModal: React.FC<TestAddToGroupModalProps> = ({
 
     return (
         <>
-            <div className="modal-overlay" onClick={ () => {
-            setSelectedTestIds([]);
-            onClose();
+            <div className="modal-overlay" onClick={() => {
+                setSelectedTestIds([]);
+                onClose();
             }}>
-            <div className="modal" onClick={handleModalClick}>
-                <div className="modal-content">
-                    {/* Headers and Buttons of Modal */}
-                    <h4>Select Tests To Add</h4>
-                    <input
-                        className="search-bar"
-                        type="text"
-                        placeholder="Search Tests"
-                        value={search}
-                        onChange={handleSearch}
-                    />
-                    {/* List of available tests to select */}
-                    <ul>
-                        {/* If there are valid tests in the filtered list */}
-                        {filteredTests.length > 0 ? (
-                            // Then create list of tests with check boxes
-                            // When box is toggled, update selected list
-                            // (init toggle is based on selected tests when search updates)
-                            filteredTests.map((test) => (
-                                <li key={test.testId}>
-                                    <label>
-                                        <input
-                                            type="checkbox"
-                                            checked={selectedTestIds.includes(test.testId)}
-                                            onChange={() => toggleTestSelection(test.testId)}
-                                        />
-                                        {test.testName.toString()}
-                                    </label>
-                                </li>
-                            ))
-                        ) : (
-                            // Else let user know search is bad
-                            <p>No tests match the search.</p>
-                        )}
-                    </ul>
-                    {/* Add selected tests and close modal */}
-                    <button onClick={handleAddTests}>Add Selected</button>
+                <div className="modal" onClick={handleModalClick}>
+                    <div className="modal-content">
+                        {/* Headers and Buttons of Modal */}
+                        <h4>Select Tests To Add</h4>
+                        <input
+                            className="search-bar"
+                            type="text"
+                            placeholder="Search Tests"
+                            value={search}
+                            onChange={handleSearch}
+                        />
+                        {/* List of available tests to select */}
+                        <ul>
+                            {/* If there are valid tests in the filtered list */}
+                            {filteredTests.length > 0 ? (
+                                // Then create list of tests with check boxes
+                                // When box is toggled, update selected list
+                                // (init toggle is based on selected tests when search updates)
+                                filteredTests.map((test) => (
+                                    <li key={test.testId}>
+                                        <label>
+                                            <input
+                                                type="checkbox"
+                                                checked={selectedTestIds.includes(test.testId)}
+                                                onChange={() => toggleTestSelection(test.testId)}
+                                            />
+                                            {test.testName.toString()}
+                                        </label>
+                                    </li>
+                                ))
+                            ) : (
+                                // Else let user know search is bad
+                                <p>No tests match the search.</p>
+                            )}
+                        </ul>
+                        {/* Add selected tests and close modal */}
+                        <button onClick={handleAddTests}>Add Selected</button>
+                    </div>
                 </div>
-            </div>
             </div>
         </>
     );
