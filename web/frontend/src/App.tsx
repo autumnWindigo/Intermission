@@ -1,9 +1,9 @@
-import TestGroupDashboard from "./testGroupComponents/TestGroupDashboard";
+import DashboardLayout from "./layout/DashboardLayout";
 
 function App() {
   return (
     <div className="App">
-            <TestGroupDashboard />
+            <DashboardLayout />
     </div>
   );
 }
