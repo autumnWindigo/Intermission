@@ -45,15 +45,19 @@ const TestTile: React.FC<TestTileProps> = ({
     button to edit test
     only return boolean and output from pytest (not saved in DB)
       test groups should be used for long term tracking.
-
-
-
     */
     return (
         <div className='test-tile'>
-
+            {/* Should make into a play button */}
+            <div className='test-name'>
+                {test.testName}
+            </div>
+            <button onClick={handleRunTest} disabled={isTestRunning}>
+                { isTestRunning ? "Running..." : "Run Tests" }
+            </button>
+            <button>Edit Test</button>
         </div>
     );
-
-
 }
+
+export default TestTile;

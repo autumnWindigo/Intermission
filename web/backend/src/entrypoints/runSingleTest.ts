@@ -6,6 +6,7 @@
 import { Router, Request, Response } from "express";
 import { AppDataSource } from "../data-source";
 import { Test } from "../entity/Test";
+import { runPytestForSingleTest } from "../runPytestOnSingleTest";
 
 const router = Router();
 
@@ -23,6 +24,9 @@ router.post("/tests/:id/run-test", async (req: Request, res: Response) => {
             return;
         }
 
+        const singleTestResponse = await runPytestForSingleTest(test.testId);
+
+        res.status(200).json(singleTestResponse);
     } catch (error) {
         console.error("Error launching test", error);
         res.status(500).json({ error: "Error launching test" });

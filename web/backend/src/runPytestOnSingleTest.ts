@@ -11,7 +11,7 @@ import { Test } from "./entity/Test"
 import { spawn } from "child_process";
 import path from "path";
 
-export async function runPytestForSingleGroup(testId: number): Promise<{
+export async function runPytestForSingleTest(testId: number): Promise<{
     result: Boolean,
     output: string,
 }> {

@@ -39,11 +39,10 @@ const TestGroupDashboard: React.FC = () => {
         );
     };
 
-
     // On update run through the array
     // If we hit an updated test group then replace old with updated
     // could use .find() but it's still just O(n) and this is simpler
-    const handleEditTest = (
+    const handleEditGroup = (
         updatedGroup: { testGroupId: number, name: string, schedule: string | null }) => {
         if (currentGroup === null) return;
         // Update Group in DB
@@ -110,7 +109,7 @@ const TestGroupDashboard: React.FC = () => {
                 <EditTestGroupModal
                     isOpen={isEditModalOpen}
                     onClose={() => setIsEditModalOpen(false)}
-                    onEditTest={handleEditTest}
+                    onEditGroup={handleEditGroup}
                     currentName={currentGroup?.name || ""}
                     currentSchedule={currentGroup?.schedule || ""}
                     currentId={currentGroup?.testGroupId || -1}
