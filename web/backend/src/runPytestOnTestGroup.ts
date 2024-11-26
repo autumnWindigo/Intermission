@@ -55,15 +55,10 @@ export async function runPytestForTestGroup(groupId: number): Promise<TestGroup>
         });
 
         let stdout = "";
-        let stderr = "";
 
         // On writes append to stdout & error
         pytest.stdout.on("data", (data) => {
             stdout += data.toString();
-        });
-
-        pytest.stderr.on("data", (data) => {
-            stderr += data.toString();
         });
 
         // When pytest successfully closes

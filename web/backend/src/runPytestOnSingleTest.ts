@@ -11,7 +11,10 @@ import { Test } from "./entity/Test"
 import { spawn } from "child_process";
 import path from "path";
 
-export async function runPytestForSingleGroup(testId: number): Promise<Boolean> {
+export async function runPytestForSingleGroup(testId: number): Promise<{
+    result: Boolean,
+    output: string,
+}> {
     const testRepo = AppDataSource.getRepository(Test);
 
     // get test
@@ -38,15 +41,18 @@ export async function runPytestForSingleGroup(testId: number): Promise<Boolean> 
         });
 
         let stdout = "";
-        let stderr = "";
 
         // On writes append to stdout & error
         pytest.stdout.on("data", (data) => {
             stdout += data.toString();
         });
 
-        pytest.stderr.on("data", (data) => {
-            stderr += data.toString();
+        pytest.on("close", (code) => {
+            resolve({result: code === 0, output: stdout});
+        });
+
+        pytest.on("error", (error) => {
+            reject({result: false, output: error});
         });
     });
 };
