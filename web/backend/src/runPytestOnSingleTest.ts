@@ -1,0 +1,52 @@
+//*** Andrew Kantner
+//*** Database Management Systems
+//*** December 5
+//*** Runs pytest for single test when testId is passed
+// This is NOT preferred to test group it's more for end user
+//   testing that single tests work and debugging systems
+//   results will NOT be saved only returned to frontend temporarily
+
+import { AppDataSource } from "./data-source"
+import { Test } from "./entity/Test"
+import { spawn } from "child_process";
+import path from "path";
+
+export async function runPytestForSingleGroup(testId: number): Promise<Boolean> {
+    const testRepo = AppDataSource.getRepository(Test);
+
+    // get test
+    const test = await testRepo.findOne({
+        where: { testId: testId },
+    })
+
+    // Confirm is valid test
+    if (!test || !test.filePath || !test.testName) {
+        throw new Error(`Test (${test?.testName}) is not properly initialized`)
+    }
+
+    const command = "pytest";
+    const args = [...test.filePath, "--allow", test.testName];
+    const pythonExecutable = process.env.PYTHON_EXEC || "";
+
+    if (process.env.PYTHON_EXEC === "") {
+        throw new Error("PYTHON_EXEC not set or found");
+    }
+
+    return new Promise((resolve, reject) => {
+        const pytest = spawn(command, args, {
+        env: {...process.env, PATH: path.dirname(pythonExecutable)}
+        });
+
+        let stdout = "";
+        let stderr = "";
+
+        // On writes append to stdout & error
+        pytest.stdout.on("data", (data) => {
+            stdout += data.toString();
+        });
+
+        pytest.stderr.on("data", (data) => {
+            stderr += data.toString();
+        });
+    });
+};

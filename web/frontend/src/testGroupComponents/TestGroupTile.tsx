@@ -18,7 +18,12 @@ interface TestGroupTileProps {
     onUpdateGroup: (updatedGroup: TestGroup) => void;
 };
 
-const TestGroupTile: React.FC<TestGroupTileProps> = ({ group, onAddTests, onEditGroup, onUpdateGroup }) => {
+const TestGroupTile: React.FC<TestGroupTileProps> = ({
+    group,
+    onAddTests,
+    onEditGroup,
+    onUpdateGroup
+}) => {
     const [isExpanded, setIsExpanded] = useState(false); // If expanded to show all tests & results
     const [isTestRunning, setIsTestRunning] = useState(false);
 

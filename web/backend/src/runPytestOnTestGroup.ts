@@ -38,6 +38,7 @@ export async function runPytestForTestGroup(groupId: number): Promise<TestGroup>
     // Construct the pytest command
     // Pytest command will look like this in terminal:
     //   pytest path1 path2 --allow test1,test2,test3
+    // We need to specify python exec because it must be run from venv
     const command = "pytest";
     const args = [...filePaths, "--allow", testGroup.tests.map((t) => t.testName).join(",")];
     const pythonExecutable = process.env.PYTHON_EXEC || "";
@@ -68,14 +69,8 @@ export async function runPytestForTestGroup(groupId: number): Promise<TestGroup>
         // When pytest successfully closes
         pytest.on("close", async (code) => {
             /* TODO TODO TODO
-            tests/unit_tests/unit_tests.py .u,.  [ 50%]
-            pytest output lines look like this for each file
-            need to write regex to match the ',' and 'u' between '.'
-            to count amount of passed and failed tests
-
-            \.[u,\,]*\. <- something like this
-
-            (in case of skip I want to explicitly count failed)
+            Parse final line of output.
+            Very explicitly lists subtests passed and failed
             */
 
             // Parse output from pytest success

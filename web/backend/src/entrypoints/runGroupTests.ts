@@ -1,3 +1,8 @@
+//*** Andrew Kantner
+//*** Database Management Systems
+//*** December 5
+//*** API entrypoint to run all tests in a test group
+
 import { Router, Request, Response } from "express";
 import { AppDataSource } from "../data-source";
 import { TestGroup } from "../entity/TestGroup";
