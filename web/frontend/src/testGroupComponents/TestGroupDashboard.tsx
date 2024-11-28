@@ -75,6 +75,19 @@ const TestGroupDashboard: React.FC = () => {
         setIsAddModalOpen(false);
     };
 
+    const handleNewGroup = (newGroupName: string) => {
+        api
+            .post('/api/test-group', { name: newGroupName })
+            .then((res) => {
+                console.log("Added new test group:", res.data);
+                setTestGroups([...testGroups, ...res.data]); // Append New Group
+            })
+            .catch((error) => {
+                console.error("Error adding new test group:", error);
+            });
+
+    }
+
     // This is literally just a div to hold TestGroupTiles
     // Will make a nicer looking title / holding space for them later
     console.log(testGroups);
