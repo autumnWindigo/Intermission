@@ -18,6 +18,7 @@ const TestAddToGroupModal: React.FC<TestAddToGroupModalProps> = ({
     isOpen,
     onClose,
     onAddTests,
+    group,
 }) => {
     const [availableTests, setAvailableTests] = useState<Test[]>([]);
     const [selectedTestIds, setSelectedTestIds] = useState<number[]>([]);
@@ -30,6 +31,7 @@ const TestAddToGroupModal: React.FC<TestAddToGroupModalProps> = ({
                 .get("/api/test").then((res) => {
                     setAvailableTests(res.data);
                 });
+            setSelectedTestIds([...group?.tests.map((test) => test.testId) || []]);
         }
     }, [isOpen]);
 
@@ -60,7 +62,6 @@ const TestAddToGroupModal: React.FC<TestAddToGroupModalProps> = ({
     // Resets selected tests & closes modal
     const handleAddTests = () => {
         onAddTests(selectedTestIds);
-        setSelectedTestIds([]);
         onClose();
     };
 
@@ -83,7 +84,7 @@ const TestAddToGroupModal: React.FC<TestAddToGroupModalProps> = ({
                 <div className="modal" onClick={handleModalClick}>
                     <div className="modal-content">
                         {/* Headers and Buttons of Modal */}
-                        <h4>Select Tests To Add</h4>
+                        <h4>Select Tests</h4>
                         <input
                             className="search-bar"
                             type="text"

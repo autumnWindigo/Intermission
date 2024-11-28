@@ -32,10 +32,7 @@ const DashboardLayout: React.FC = () => {
             {/* Header */}
             <div className="dashboard-content">
                 <header className="top-bar">
-                {/* Dumb but just have conditionals for the header since it's shared idk how else to do it */}
                     {currentDashboard}
-                    {currentDashboard === 'testGroupDashboard' && <button>Add Test Group</button>}
-                    {currentDashboard === 'testDashboard' && <button>Add Test</button>}
                 </header>
 
                 {/* Dashboard Window: all new pages should be designed to fit in here */}

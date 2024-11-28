@@ -10,12 +10,14 @@ import { TestGroup } from "./types";
 import './TestGroupDashboard.css';
 import TestAddToGroupModal from "./TestAddToGroupModal";
 import EditTestGroupModal from "./EditTestGroupModal";
+import TestGroupAddModal from "./TestGroupAddModal";
 
 const TestGroupDashboard: React.FC = () => {
     const [testGroups, setTestGroups] = useState<TestGroup[]>([]);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
     const [currentGroup, setCurrentGroup] = useState<TestGroup | null>(null);
+    const [isGroupAddModelOpen, setIsGroupAddModelOpen] = useState(false);
 
     // Run on innitial render to load test groups
     useEffect(() => {
@@ -75,12 +77,13 @@ const TestGroupDashboard: React.FC = () => {
         setIsAddModalOpen(false);
     };
 
+    // Update database and UI with new test group
     const handleNewGroup = (newGroupName: string) => {
         api
             .post('/api/test-group', { name: newGroupName })
             .then((res) => {
                 console.log("Added new test group:", res.data);
-                setTestGroups([...testGroups, ...res.data]); // Append New Group
+                setTestGroups([...testGroups, res.data]); // Append New Group
             })
             .catch((error) => {
                 console.error("Error adding new test group:", error);
@@ -93,6 +96,9 @@ const TestGroupDashboard: React.FC = () => {
     console.log(testGroups);
     return (
         <div className="dashboard-container">
+            <button className="add-group" onClick={() => setIsGroupAddModelOpen(true)}>
+                Add Test Group
+            </button>
             <div className="dashboard">
                 {testGroups.map((group) => (
                     <div key={group.testGroupId}>
@@ -127,7 +133,12 @@ const TestGroupDashboard: React.FC = () => {
                     currentSchedule={currentGroup?.schedule || ""}
                     currentId={currentGroup?.testGroupId || -1}
                 />
-                {/* Add Edit Test Modal Here */}
+
+                <TestGroupAddModal
+                    isOpen={isGroupAddModelOpen}
+                    onClose={() => setIsGroupAddModelOpen(false)}
+                    onAddGroup={handleNewGroup}
+                />
             </div>
         </div>
     );

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 interface TestGroupAddModalProps {
     isOpen: Boolean;
-    onClose(): () => void;
+    onClose: () => void;
     onAddGroup: (newGroupName: string) => void;
 };
 
@@ -30,7 +30,7 @@ const TestGroupAddModal: React.FC<TestGroupAddModalProps> = ({
     if (!isOpen) return null;
 
     return (
-        <div className="modal-overlay">
+        <div className="modal-overlay" onClick={onClose}>
             <div className="modal" onClick={handleModalClick}>
                 <h4>Enter Name For New Test Group</h4>
                 <input

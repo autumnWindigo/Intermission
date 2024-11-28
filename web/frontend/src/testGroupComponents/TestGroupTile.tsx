@@ -64,7 +64,7 @@ const TestGroupTile: React.FC<TestGroupTileProps> = ({
             <button onClick={toggleExpansion}>
                 {isExpanded ? "Collapse" : "Expand"}
             </button>
-            <button onClick={onAddTests}>Add Tests</button>
+            <button onClick={onAddTests}>Set Tests</button>
             <button onClick={onEditGroup}>Edit Group</button>
             <button onClick={handleRunTests} disabled={isTestRunning}>
                 {isTestRunning ? "Running..." : "Run Tests" }
