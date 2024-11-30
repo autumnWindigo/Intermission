@@ -34,34 +34,30 @@ router.post("/:id/add-tests", async (req: Request, res: Response) => {
         }
 
         // Gather selected tests
-        const testsToAdd = await testRepo.findBy({
-            testId: In(testIds)
+        const testsToAssign = await testRepo.findBy({
+            testId: In(testIds),
         });
 
         // Verify all are valid tests
-        if (testsToAdd.length !== testIds.length) {
-            res.status(404).json({ error: 'One or more testIds are invalid.' });
+        if (testsToAssign.length !== testIds.length) {
+            res.status(404).json({ error: "One or more testIds are invalid." });
             return;
         }
 
-        // Check for duplicates
-        const existingTestIds = testGroup.tests.map((test) => test.testId);
-        const duplicateTestIds = testsToAdd.filter((test) => existingTestIds.includes(test.testId));
-
-        if (duplicateTestIds.length > 0) {
-            // I don't think there's a matching status code for this so throw error
-            throw new Error(`Duplicate tests detected: ${duplicateTestIds.map((test) => test.testId).join(', ')}`);
-        }
-
-        // Add tests to group
-        testGroup.tests = [...testGroup.tests, ...testsToAdd];
+        // Replace tests in the group with the new ones
+        testGroup.tests = testsToAssign;
         await testGroupRepo.manager.save(testGroup);
 
         // Return updated test group
-        res.status(200).json(testGroup);
+        const updatedTestGroup = await testGroupRepo.findOne({
+            where: { testGroupId: parseInt(testGroupId) },
+            relations: ["tests", "results"],
+        });
+
+        res.status(200).json(updatedTestGroup);
     } catch (error) {
-        console.error("Failed to add test to group:", error);
-        res.status(500).json({ error: "Failed to add test to group" });
+        console.error("Failed to update tests in group:", error);
+        res.status(500).json({ error: "Failed to update tests in group" });
     }
 });
 
