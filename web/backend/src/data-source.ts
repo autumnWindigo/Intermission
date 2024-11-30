@@ -15,7 +15,7 @@ import { TestResult } from "./entity/TestResult";
 export const AppDataSource = new DataSource({
     type: "mariadb",
     host: process.env.DB_HOST,
-    port: 3306,
+    port: 3307,
     database: process.env.DB_NAME,
     username: process.env.DB_USER,
     entities: [Test, TestGroup, TestTimestamp, TestResult],

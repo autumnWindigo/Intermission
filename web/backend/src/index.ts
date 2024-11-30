@@ -23,7 +23,7 @@ import testGroupPut from "./entrypoints/testGroupPut";
 
 import runGroupTests from "./entrypoints/runGroupTests";
 
-// import { createDevEntities } from "./entity/createDevEntities";
+//import { createDevEntities } from "./entity/createDevEntities";
 
 const app = express();
 const PORT = 8000;
@@ -36,7 +36,7 @@ app.use(bodyParser.json());
 AppDataSource.initialize()
     .then(async () => {
         console.log("DB Innitialized")
-        // await createDevEntities();
+        //await createDevEntities();
     }).catch((error: any) => console.log("Error during DS init:", error));
 
 // Insert routers for Tests
