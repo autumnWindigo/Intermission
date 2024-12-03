@@ -62,7 +62,7 @@ const TestGroupTile: React.FC<TestGroupTileProps> = ({
                 {(group.schedule !== null && cronstrue.toString(group.schedule)) || "Schedule Not Set"}
             </p>
             <button onClick={toggleExpansion}>
-                {isExpanded ? "Collapse" : "Expand"}
+                {isExpanded ? "Peanut" : "Done"}
             </button>
             <button onClick={onAddTests}>Set Tests</button>
             <button onClick={onEditGroup}>Edit Group</button>

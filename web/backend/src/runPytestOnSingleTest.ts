@@ -8,14 +8,18 @@
 
 import { AppDataSource } from "./data-source"
 import { Test } from "./entity/Test"
+import { TestResult } from "./entity/TestResult";
 import { spawn } from "child_process";
 import path from "path";
+
 
 export async function runPytestForSingleTest(testId: number): Promise<{
     result: Boolean,
     output: string,
 }> {
     const testRepo = AppDataSource.getRepository(Test);
+    const testResultRepository = AppDataSource.getRepository(TestResult);
+
 
     // get test
     const test = await testRepo.findOne({
@@ -55,4 +59,4 @@ export async function runPytestForSingleTest(testId: number): Promise<{
             reject({result: false, output: error});
         });
     });
-};
+}
