@@ -1,4 +1,10 @@
+//*** Andrew Kantner
+//*** Database Management Systems
+//*** December 5
+//*** Layout to hold various dashboards
+
 import React, { useState } from "react";
+import ResponseDashboard from "../responseListComponents/ResponseDashboard";
 import TestGroupDashboard from "../testGroupComponents/TestGroupDashboard";
 import TestDashboard from "../testListComponents/TestDashboard";
 import './DashboardLayout.css';
@@ -14,6 +20,8 @@ const DashboardLayout: React.FC = () => {
                 return <TestGroupDashboard />;
             case 'testDashboard':
                 return <TestDashboard />;
+            case 'resultDashboard':
+                return <ResponseDashboard />;
             default:
                 return <p> No Dashboard Selected! </p>;
         }
@@ -23,10 +31,12 @@ const DashboardLayout: React.FC = () => {
         <div className="dashboard-layout">
             {/* SideBar (have on top) */}
             <aside className="sidebar">
+                <h4>Intermission</h4>
                 {/* Add buttons to activate dashboards here */}
                 <button onClick={() => setCurrentDashboard('testGroupDashboard')}>Test Groups</button>
                 <button onClick={() => setCurrentDashboard('testDashboard')}>Tests</button>
-                <button onClick={() => setCurrentDashboard('temp')}>Temp</button>
+                <button onClick={() => setCurrentDashboard('resultDashboard')}>Results</button>
+                <button onClick={() => setCurrentDashboard('infoDashboard')}>Version</button>
             </aside>
 
             {/* Header */}

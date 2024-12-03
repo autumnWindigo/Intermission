@@ -1,3 +1,8 @@
+//*** Andrew Kantner
+//*** Database Management Systems
+//*** December 5
+//*** Response Tiles used in Response Tile Dashboard
+
 import React, { useState } from "react";
 import { TestGroup } from "../testGroupComponents/types";
 import PassCircle from "./PassCircle";
@@ -23,20 +28,24 @@ const ResponseTile: React.FC<ResponseTileProps> = ({ group }) => {
     return (
         <div className="response-tile">
             <h3>{group.name}</h3>
-            {group.results.map((result) => (
-                <>
-                    <div key="result-shorthand">
-                        {loadResultShorthand(result.overallSuccess)}
-                    </div>
-                    <p>{result.createdAt.toString()}</p>
-                    <button onClick={toggleExpansion}>
-                        {isExpanded ? "Collapse" : "Expand"}
-                    </button>
-                    <div className={`expanded-content ${isExpanded ? "expanded" : ""}`}>
-                        {isExpanded && <ResponeDetails result={result} />}
-                    </div>
-                </>
+            <button onClick={toggleExpansion}>
+                {isExpanded ? "Collapse" : "Expand"}
+            </button>
+            {group.results.sort((a,b) => // sort to show most recent first
+                b.createdAt.toLocaleString().localeCompare(a.createdAt.toLocaleString()))
+                .map((result) => ( // map to components
+                <div className={`expanded-content ${isExpanded ? "expanded" : ""}`}>
+                    {isExpanded && <>
+                        <p>{new Date(result.createdAt).toLocaleString()}</p>
+                        <div key="result-shorthand">
+                            {loadResultShorthand(result.overallSuccess)}
+                        </div>
+                        <ResponeDetails result={result} />
+                    </>}
+                </div>
             ))}
         </div>
     )
 }
+
+export default ResponseTile;

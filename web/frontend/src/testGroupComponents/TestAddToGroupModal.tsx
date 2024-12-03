@@ -1,7 +1,7 @@
 //*** Andrew Kantner
 //*** Database Management Systems
 //*** December 5
-//*** Modal for adding test groups through api
+//*** Modal for adding tests to groups through api
 
 import React, { useState, useEffect } from "react";
 import { Test, TestGroup } from "./types";

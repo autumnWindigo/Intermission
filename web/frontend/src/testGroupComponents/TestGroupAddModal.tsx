@@ -1,3 +1,8 @@
+//*** Andrew Kantner
+//*** Database Management Systems
+//*** December 5
+//*** Modal for adding test groups through api
+
 import React, { useState } from "react";
 
 interface TestGroupAddModalProps {

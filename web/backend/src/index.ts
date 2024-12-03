@@ -23,6 +23,7 @@ import testGroupPut from "./entrypoints/testGroupPut";
 
 import runGroupTests from "./entrypoints/runGroupTests";
 import runSingleTest from "./entrypoints/runSingleTest";
+import { initializeSchedulers } from "./scheduler";
 // import { createDevEntities } from "./entity/createDevEntities";
 
 const app = express();
@@ -36,6 +37,7 @@ app.use(bodyParser.json());
 AppDataSource.initialize()
     .then(async () => {
         console.log("DB Innitialized")
+        initializeSchedulers();
         // await createDevEntities();
     }).catch((error: any) => console.log("Error during DS init:", error));
 
