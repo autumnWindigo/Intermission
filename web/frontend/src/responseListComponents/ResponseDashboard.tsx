@@ -12,7 +12,7 @@ const ResponseDashboard: React.FC = () => {
             .then((res) => {
                 setTestGroups(res.data)
             })
-    });
+    }, []);
 
     return (
         <div className="dashboard-container">
