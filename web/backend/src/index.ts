@@ -22,7 +22,7 @@ import testGroupPost from "./entrypoints/testGroupPost";
 import testGroupPut from "./entrypoints/testGroupPut";
 
 import runGroupTests from "./entrypoints/runGroupTests";
-
+import runSingleTest from "./entrypoints/runSingleTest";
 // import { createDevEntities } from "./entity/createDevEntities";
 
 const app = express();
@@ -44,6 +44,8 @@ app.use("/api/test", testController); // GET (/test:/id?)
 app.use("/api/test", testPost); // POST (/test)
 app.use("/api/test", testPut); // PUT (/test/:id)
 app.use("/api/test", testDelete); // DELETE (/test/:id)
+app.use("/api/test", runSingleTest);
+
 
 // Insert routers for Test Groups
 app.use("/api/test-group", testGroupController); // GET (/test-group/:id?)
