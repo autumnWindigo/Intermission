@@ -10,7 +10,8 @@ import { runPytestForSingleTest } from "../runPytestOnSingleTest";
 
 const router = Router();
 
-router.post("/tests/:id/run-test", async (req: Request, res: Response) => {
+router.post("/:id/run-test", async (req: Request, res: Response) => {
+
     const { id } = req.params;
 
     try {
