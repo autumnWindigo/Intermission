@@ -20,9 +20,11 @@ import testGroupController from "./controllers/testGroupController";
 import addTestTogroup from "./entrypoints/addTestToGroup";
 import testGroupPost from "./entrypoints/testGroupPost";
 import testGroupPut from "./entrypoints/testGroupPut";
+import testGroupDelete from "./entrypoints/testGroupDelete";
 
 import runGroupTests from "./entrypoints/runGroupTests";
 import runSingleTest from "./entrypoints/runSingleTest";
+
 import { initializeSchedulers } from "./scheduler";
 // import { createDevEntities } from "./entity/createDevEntities";
 
@@ -55,6 +57,7 @@ app.use("/api/test-group", addTestTogroup); // POST (/test-group/:id/add-tests)
 app.use("/api/test-group", testGroupPost); // POST (/test-group)
 app.use("/api/test-group", testGroupPut); // PUT (/test-group/:id)
 app.use("/api/test-group", runGroupTests); // Post (/:id/run-tests)
+app.use("/api/test-group", testGroupDelete);
 
 // I need to rewrite remove tests from group
 

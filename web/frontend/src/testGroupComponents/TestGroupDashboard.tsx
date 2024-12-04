@@ -88,8 +88,10 @@ const TestGroupDashboard: React.FC = () => {
             .catch((error) => {
                 console.error("Error adding new test group:", error);
             });
+    };
 
-    }
+    const handleRemoveGroup = (groupToRemove: number) => {
+    };
 
     // This is literally just a div to hold TestGroupTiles
     // Will make a nicer looking title / holding space for them later

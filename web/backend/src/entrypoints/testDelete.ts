@@ -26,8 +26,9 @@ router.delete("/:id", async (req: Request, res: Response) => {
 
         // Deletion in related tables is handled by typeorm
         //  because of cascading
-        await repo.remove(existingTest);
+        const removed = await repo.remove(existingTest);
 
+        res.status(200).json({removed});
     } catch (error) {
         console.error("Error deleting test:", error);
         res.status(500).json({ error: "Error deleting test" });
