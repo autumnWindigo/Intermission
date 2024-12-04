@@ -57,7 +57,7 @@ app.use("/api/test-group", addTestTogroup); // POST (/test-group/:id/add-tests)
 app.use("/api/test-group", testGroupPost); // POST (/test-group)
 app.use("/api/test-group", testGroupPut); // PUT (/test-group/:id)
 app.use("/api/test-group", runGroupTests); // Post (/:id/run-tests)
-app.use("/api/test-group", testGroupDelete);
+app.use("/api/test-group", testGroupDelete); // DELETE (/test-group/:id)
 
 // I need to rewrite remove tests from group
 
