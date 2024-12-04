@@ -91,6 +91,15 @@ const TestGroupDashboard: React.FC = () => {
     };
 
     const handleRemoveGroup = (groupToRemove: number) => {
+        api
+            .delete(`/api/test-group/${groupToRemove}`)
+            .then((res) => {
+                console.log("Removed test:", res.data);
+                setTestGroups([...testGroups.filter(group => group.testGroupId !== res.data.testGroupId)]);
+            })
+            .catch((error) => {
+                console.error("Error adding new test group:", error);
+            });
     };
 
     // This is literally just a div to hold TestGroupTiles
@@ -108,6 +117,7 @@ const TestGroupDashboard: React.FC = () => {
                             key={group.testGroupId}
                             group={group}
                             onUpdateGroup={updateGroup}
+                            onRemoveGroup={handleRemoveGroup}
                             onAddTests={() => {
                                 setCurrentGroup(group);
                                 setIsAddModalOpen(true);

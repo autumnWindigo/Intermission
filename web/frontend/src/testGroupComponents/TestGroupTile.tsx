@@ -16,13 +16,15 @@ interface TestGroupTileProps {
     onAddTests: () => void;
     onEditGroup: () => void;
     onUpdateGroup: (updatedGroup: TestGroup) => void;
+    onRemoveGroup: (removedGroup: number) => void;
 };
 
 const TestGroupTile: React.FC<TestGroupTileProps> = ({
     group,
     onAddTests,
     onEditGroup,
-    onUpdateGroup
+    onUpdateGroup,
+    onRemoveGroup,
 }) => {
     const [isExpanded, setIsExpanded] = useState(false); // If expanded to show all tests & results
     const [isTestRunning, setIsTestRunning] = useState(false);
@@ -45,6 +47,10 @@ const TestGroupTile: React.FC<TestGroupTileProps> = ({
             .finally(() => { setIsTestRunning(false) });
     }
 
+    const handleRemoveGroup = () => {
+        onRemoveGroup(group.testGroupId);
+    }
+
     return (
         <div className={`test-group-tile ${isExpanded ? "expanded" : ""}`}>
             {/* Format for Group Tile:
@@ -59,7 +65,7 @@ const TestGroupTile: React.FC<TestGroupTileProps> = ({
             */}
             <h3>{group.name}</h3>
             <p>
-                {(group.schedule !== null && cronstrue.toString(group.schedule)) || "Schedule Not Set"}
+                {(group.schedule !== null && group.schedule !== "" && cronstrue.toString(group.schedule)) || "Schedule Not Set"}
             </p>
             <button onClick={toggleExpansion}>
                 {isExpanded ? "Collapse" : "Expand"}
@@ -69,6 +75,7 @@ const TestGroupTile: React.FC<TestGroupTileProps> = ({
             <button onClick={handleRunTests} disabled={isTestRunning}>
                 {isTestRunning ? "Running..." : "Run Tests" }
             </button>
+            <button onClick={handleRemoveGroup}>Delete Group</button>
 
             {/*
                 Only show details if expanded

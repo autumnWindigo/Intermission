@@ -19,7 +19,7 @@ const ResponseDashboard: React.FC = () => {
             <div className="dashboard">
                 {testGroups.map((group) => (
                     <div key={group.testGroupId}>
-                        <ResponseTile group={group} />
+                        <ResponseTile group={group} key={group.testGroupId} />
                     </div>
                 ))}
             </div>

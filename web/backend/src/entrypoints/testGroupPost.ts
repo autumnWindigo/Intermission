@@ -19,8 +19,9 @@ router.post("/", async (req: Request, res: Response) => {
 
         newTestGroup.name = name;
 
-        if (schedule) newTestGroup.schedule = schedule;
-        if (results) newTestGroup.results = results;
+        newTestGroup.schedule = schedule ? schedule : null;
+        newTestGroup.results = results ? results : [];
+        newTestGroup.tests = [];
 
         const finalTestGroup = await repo.save(newTestGroup);
 
