@@ -10,7 +10,7 @@ import testRunApi from "../testRunApi";
 interface TestTileProps {
     test: Test, // Test object obvious
     // For editing tests (need to update parent)
-    onUpdateTest: (updatedTest: Test) => void;
+    onUpdateTest: (result: Boolean, output: string) => void;
 };
 
 // Tile to be in a list of tests.
@@ -30,7 +30,8 @@ const TestTile: React.FC<TestTileProps> = ({
             .post(`/api/test/${test.testId}/run-test`)
             .then((response) => {
                 console.log("Completed running test:", response);
-                onUpdateTest(response.data);
+                const res = response.data;
+                onUpdateTest(res.result, res.output);
             })
             .catch((error) => {
                 console.error("Error Running test", error);

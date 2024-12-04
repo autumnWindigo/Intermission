@@ -18,14 +18,7 @@ const TestDashboard: React.FC = () => {
     }, []); // Only run on first render
 
     // Update list of tests
-    const updateTest = (updatedTest: Test) => {
-        setTests((prevTests) =>
-            prevTests.map((test) =>
-                test.testId === updatedTest.testId
-                ? {...tests, ...updatedTest}
-                : test
-            )
-        );
+    const updateTest = (result: Boolean, output: string) => {
     };
 
     // const handleEditTest = (
