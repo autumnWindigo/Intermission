@@ -36,12 +36,14 @@ const TestTile: React.FC<TestTileProps> = ({
                 onUpdateTest(res.result, res.output);
             })
             .catch((error) => {
+                console.log(test)
                 console.error("Error Running test", error);
             })
             .finally(() => {
                 setIsTestRunning(false);
             })
     }
+
     /* this should hold
     button to run test
     button to edit test

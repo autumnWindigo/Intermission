@@ -28,12 +28,13 @@ export async function runPytestForSingleTest(testId: number): Promise<{
     }
 
     const command = "pytest";
-    const args = [...test.filePath, "--allow", test.testName];
+    const args = [test.filePath, "--allow", test.testName];
     const pythonExecutable = process.env.PYTHON_EXEC || "";
 
     if (process.env.PYTHON_EXEC === "") {
         throw new Error("PYTHON_EXEC not set or found");
     }
+    console.log("running:", command, args);
 
     return new Promise((resolve, reject) => {
         const pytest = spawn(command, args, {

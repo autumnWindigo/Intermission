@@ -17,10 +17,11 @@ router.post("/:id/run-test", async (req: Request, res: Response) => {
         const repo = AppDataSource.getRepository(Test);
         const test = await repo.findOne({
             where: { testId: parseInt(id) },
-            relations: ["testGroups"],
+            relations: ["groups"],
         });
 
         if (!test) {
+            res.status(404).json({ error: "test not found" });
             return;
         }
 
