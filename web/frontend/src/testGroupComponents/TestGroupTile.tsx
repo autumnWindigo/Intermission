@@ -8,6 +8,8 @@ import { TestGroup } from "./types";
 import TestGroupDetails from "./TestGroupDetails";
 import * as cronstrue from "cronstrue";
 import testRunApi from "../testRunApi";
+import { FaPlay } from "react-icons/fa";
+import { ImSpinner2 } from "react-icons/im";
 
 interface TestGroupTileProps {
     // TestGroup from backend
@@ -73,7 +75,7 @@ const TestGroupTile: React.FC<TestGroupTileProps> = ({
             </div>
             <div className="run-button">
                 <button onClick={handleRunTests} disabled={isTestRunning}>
-                    {isTestRunning ? "Running..." : "Run Tests"}
+                    {isTestRunning ? ( <ImSpinner2 className="spinner-icon" /> ) : ( <FaPlay className="play-icon" />)}
                 </button>
             </div>
 

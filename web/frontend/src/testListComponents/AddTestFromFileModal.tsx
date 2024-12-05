@@ -34,6 +34,7 @@ const AddTestFromFileModal: React.FC<AddTestFromFileModalProps> = ({
         api.post(`/api/test/${fileName}/add-tests-from-file`)
             .then((res) => {
                 setSuccessMessage(`Tests added successfully: ${res.data.tests.map((test: any) => test.testName).join(", ")}`);
+                console.log(res.data.tests);
                 onAddTests(res.data.tests);
                 // Reset input once updated
                 setFileName("");

@@ -85,8 +85,7 @@
 }
 
 /* Test Group Tile Buttons */
-.test-group-dashboard .test-group-tile .expanded-content button,
-.test-group-dashboard .test-group-tile .run-button button {
+.test-group-dashboard .test-group-tile .expanded-content button {
     background: none;
     border: none;
     display: flex;
@@ -94,6 +93,18 @@
     color: #007bff;
     cursor: pointer;
     padding: 4px 8px;
+}
+
+.test-group-dashboard .test-group-tile .run-button button {
+    margin-left: -8px;
+    background: none;
+    border: none;
+    display: flex;
+    font-size: 14px;
+    color: #007bff;
+    cursor: pointer;
+    padding: 4px 8px;
+    align-items: center;
 }
 
 /* Animated closing content */

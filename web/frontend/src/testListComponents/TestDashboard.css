@@ -20,3 +20,28 @@
 .add-test-from-file:active {
     background-color: #004085;
 }
+
+/* Test Dashboard */
+.test-dashboard .test-tile {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px;
+    margin: 0.5vh auto; /* Remove extra margins */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    align-items: center;
+    display: inline-flex;
+    max-width: 98%;
+}
+
+.test-dashboard .test-tile button {
+    background: none;
+    border: none;
+    display: inline-flex;
+    font-size: 14px;
+    color: #007bff;
+    cursor: pointer;
+    padding: 4px 8px;
+    align-items: center;
+}

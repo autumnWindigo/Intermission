@@ -29,22 +29,6 @@ const TestDashboard: React.FC = () => {
     const updateTest = (result: Boolean, output: string) => {
     };
 
-    // const handleEditTest = (
-    //     updatedTest: { testId: number, name: string,  }
-    // ) => {
-    //     if (currentTest === null) return;
-    //     // Update in DB
-    //     api
-    //         .put(`api/test/${currentTest.testId}`) // Update DB
-    //         .then((res) => {
-    //             console.log("Updated test:", res.data);
-    //             updateTest(currentTest); // Update side
-    //         })
-    //         .catch((error) => {
-    //             console.error("Error updating test", error);
-    //         })
-    //     setIsEditModalOpen(false);
-    // };
     const removeTest = (testId: number) => {
         // Call API to delete the test
         api

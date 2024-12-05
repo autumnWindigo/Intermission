@@ -6,6 +6,8 @@
 import React, {useState} from "react";
 import { Test } from "../testGroupComponents/types";
 import testRunApi from "../testRunApi";
+import { FaPlay } from "react-icons/fa";
+import { ImSpinner2 } from "react-icons/im";
 
 interface TestTileProps {
     test: Test, // Test object obvious
@@ -56,14 +58,13 @@ const TestTile: React.FC<TestTileProps> = ({
     };
     return (
         <div className='test-tile'>
+            <button onClick={handleRunTest} disabled={isTestRunning}>
+                {isTestRunning ? ( <ImSpinner2 className="spinner-icon" /> ) : ( <FaPlay className="play-icon" />)}
+            </button>
+            <button onClick={handleRemoveTest} className="Remove-test">Remove</button>
             <div className='test-name'>
                 {test.testName}
             </div>
-            <button onClick={handleRunTest} disabled={isTestRunning}>
-                {isTestRunning ? "Running..." : "Run Tests"}
-            </button>
-            <button>Edit Test</button>
-            <button onClick={handleRemoveTest} className="Remove-test">Remove Test</button>
             {/* Corrected line */}
         </div>
     )

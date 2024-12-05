@@ -6,12 +6,14 @@ import path from "path";
 
 // Extract pytest functions from file
 const extractTestFunctions = (fileContent: string): string[] => {
-    const testFunctionRegex = /def\s+(test\w*)\s*\(/g;
+    // regex to find test function
+    const testFunctionRegex = /^\s*def\s+(bundle_[a-zA-Z0-9_]*)\s*\(/gm;
     const matches: string[] = [];
     let match;
     while ((match = testFunctionRegex.exec(fileContent)) !== null) {
         matches.push(match[1]); // Capture function name
     }
+    console.log(matches);
     return matches;
 };
 

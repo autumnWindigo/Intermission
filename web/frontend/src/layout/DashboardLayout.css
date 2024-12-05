@@ -84,3 +84,40 @@
     overflow-y: auto;
     grid-column: 2 / span 1;
 }
+
+/* Global Button Animations */
+.action-button {
+    background: none;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #007bff;
+    cursor: pointer;
+    padding: 8px;
+    transition: transform 0.2s ease;
+}
+
+.action-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.play-icon {
+    font-size: 16px;
+}
+
+.spinner-icon {
+    font-size: 16px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
