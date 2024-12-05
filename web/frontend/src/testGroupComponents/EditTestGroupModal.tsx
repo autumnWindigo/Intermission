@@ -10,7 +10,7 @@ interface EditTestGroupModalProps {
     // Modal Specific
     isOpen: boolean
     onClose: () => void;
-    onEditGroup: (updatedGroup: {testGroupId: number, name: string, schedule: string | null}) => void;
+    onEditGroup: (updatedGroup: { testGroupId: number, name: string, schedule: string | null }) => void;
 
     // Test Group Data
     currentName: string;
@@ -58,7 +58,7 @@ const EditTestGroupModal: React.FC<EditTestGroupModalProps> = ({
     };
 
     const handleEditTest = (() => {
-        onEditGroup({testGroupId, name, schedule});
+        onEditGroup({ testGroupId, name, schedule });
         onClose();
     });
 
@@ -99,9 +99,11 @@ const EditTestGroupModal: React.FC<EditTestGroupModalProps> = ({
                         {!isValidCron && <p>Invalid cron!</p>}
                     </div>
                     {/* Only allow saves if all entries are valid */}
-                    <button onClick={handleEditTest} disabled={!isValidCron}>
-                        Save
-                    </button>
+                    <div className="modal-buttons">
+                        <button onClick={handleEditTest} disabled={!isValidCron}>
+                            Save
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

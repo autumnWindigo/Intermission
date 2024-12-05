@@ -171,6 +171,12 @@
   transition: all 0.3s ease;
 }
 
+.test-group-dashboard .modal button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .test-group-dashboard .modal ul {
     list-style: none;
     padding: 0;

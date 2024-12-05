@@ -44,7 +44,9 @@ const TestGroupAddModal: React.FC<TestGroupAddModalProps> = ({
                     value={name}
                     onChange={handleNameChange}
                 />
-                <button onClick={handleCreateGroup}>Create Group</button>
+                <div className="modal-buttons">
+                    <button onClick={handleCreateGroup}>Create Group</button>
+                </div>
             </div>
         </div>
     )
