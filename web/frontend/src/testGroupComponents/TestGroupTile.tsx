@@ -63,25 +63,29 @@ const TestGroupTile: React.FC<TestGroupTileProps> = ({
                 TODO TODO TODO
                     Run Tests: button to run test group and return results in modal
             */}
-            <h3>{group.name}</h3>
-            <p>
-                {(group.schedule !== null && group.schedule !== "" && cronstrue.toString(group.schedule)) || "Schedule Not Set"}
-            </p>
-            <button onClick={toggleExpansion}>
-                {isExpanded ? "Collapse" : "Expand"}
-            </button>
-            <button onClick={onAddTests}>Set Tests</button>
-            <button onClick={onEditGroup}>Edit Group</button>
-            <button onClick={handleRunTests} disabled={isTestRunning}>
-                {isTestRunning ? "Running..." : "Run Tests" }
-            </button>
-            <button onClick={handleRemoveGroup}>Delete Group</button>
+            <div className="test-group-tile-header">
+                <button onClick={toggleExpansion}>
+                    <h3>{group.name}</h3>
+                    <p>
+                        {(group.schedule !== null && group.schedule !== "" && cronstrue.toString(group.schedule)) || "Schedule Not Set"}
+                    </p>
+                </button>
+            </div>
+            <div className="run-button">
+                <button onClick={handleRunTests} disabled={isTestRunning}>
+                    {isTestRunning ? "Running..." : "Run Tests"}
+                </button>
+            </div>
 
             {/*
                 Only show details if expanded
                 because there can be a LOT of details after time
             */}
             <div className={`expanded-content ${isExpanded ? "expanded" : ""}`}>
+                <h4> Controls </h4>
+                <button onClick={onAddTests}>Set Tests</button>
+                <button onClick={onEditGroup}>Edit Group</button>
+                <button onClick={handleRemoveGroup}>Delete Group</button>
                 {isExpanded && <TestGroupDetails group={group} />}
             </div>
         </div>

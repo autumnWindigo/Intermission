@@ -3,7 +3,6 @@
 //*** December 5
 //*** Part of test group tile. More detailed info.
 
-import { argv0 } from "process";
 import React from "react";
 import { TestGroup } from "./types";
 

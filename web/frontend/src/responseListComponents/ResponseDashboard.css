@@ -14,11 +14,12 @@
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 12px;
-    margin: 0.5vh; /* Remove extra margins */
+    margin: 0.5vh auto; /* Remove extra margins */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 100%;
     display: flex;
     flex-direction: column;
+    max-width: 98%;
 }
 
 /* Make title and button on same line */
@@ -85,8 +86,9 @@
     border-radius: 8px;
     padding: 16px;
     margin-top: 8px;
-    overflow-x: auto;
+    overflow-y: auto;
     font-family: "Courier New", Courier, monospace;
     color: #dcdcdc;
     font-size: 14px;
+    max-height: 400px; /* Fixed scrolling for expanded block */
 }

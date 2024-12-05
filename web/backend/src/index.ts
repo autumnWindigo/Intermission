@@ -48,7 +48,7 @@ app.use("/api/test", testController); // GET (/test:/id?)
 app.use("/api/test", testPost); // POST (/test)
 app.use("/api/test", testPut); // PUT (/test/:id)
 app.use("/api/test", testDelete); // DELETE (/test/:id)
-app.use("/api/test", runSingleTest);
+app.use("/api/test", runSingleTest); // POST (/:id/run-test)
 
 
 // Insert routers for Test Groups
