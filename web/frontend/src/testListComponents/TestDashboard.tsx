@@ -37,10 +37,20 @@ const TestDashboard: React.FC = () => {
     //         })
     //     setIsEditModalOpen(false);
     // };
-    const removeTest = (testID: number) => {
+    const removeTest = (testId: number) => {
+        // Call API to delete the test
         api
-            .delete("/api/test/number")
+            .delete(`/api/test/${testId}`)
+            .then(() => {
+                // Success: Remove test from local state
+                setTests((prevTests) => prevTests.filter((test) => test.testId !== testId));
+                console.log(`Test with ID ${testId} removed successfully.`);
+            })
+            .catch((error) => {
+                console.error(`Failed to remove test with ID ${testId}.`, error);
+            });
     };
+
     return(
         <div className="test-dashboard-container">
             <div className="test-dashboard">

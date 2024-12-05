@@ -49,6 +49,8 @@ const TestTile: React.FC<TestTileProps> = ({
       test groups should be used for long term tracking.
     */
     const handleRemoveTest = () => {
+        console.log("Remove button clicked for test", test.testId);
+        onRemoveTest(test.testId); // Pass the testId back to the parent component
     };
     return (
         <div className='test-tile'>
@@ -59,7 +61,7 @@ const TestTile: React.FC<TestTileProps> = ({
                 {isTestRunning ? "Running..." : "Run Tests"}
             </button>
             <button>Edit Test</button>
-            <button onClick={handleRemoveTest} className="remove-test">Remove Test</button>
+            <button onClick={handleRemoveTest} className="Remove-test">Remove Test</button>
             {/* Corrected line */}
         </div>
     )
