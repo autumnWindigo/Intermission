@@ -1,0 +1,11 @@
+bundle_test_wordpress_main:
+  - !Context
+    dummy: ""
+
+bundle_test_wordpress_beaver:
+  - !Context
+    dummy: ""
+
+bundle_test_wordpress_writing_center:
+  - !Context
+    dummy: ""

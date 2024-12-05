@@ -28,7 +28,6 @@
 }
 
 .modal input {
-    width: 90%;
     margin: 1rem 0;
     padding: 0.8rem;
     border: 1px solid #ddd;
@@ -67,6 +66,28 @@
 
 .modal-buttons button:last-child:hover {
     background-color: #bbb;
+}
+
+/* List in Modal - One line, condensed */
+.modal ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.modal ul li {
+    display: flex;
+    margin: 0.5rem 0; /* Reduced margin for tighter spacing */
+}
+
+.modal ul li label {
+    font-size: 0.9rem; /* Slightly smaller text */
+    margin: 0; /* Remove extra margin around label */
+}
+
+.modal ul li input[type="checkbox"] {
+    margin: 0; /* Remove default margin around the checkbox */
+    transform: scale(1); /* Optional: adjust size of the checkbox if needed */
 }
 
 /* Success and Error Messages */

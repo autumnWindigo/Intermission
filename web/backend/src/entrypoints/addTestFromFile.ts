@@ -7,7 +7,7 @@ import path from "path";
 // Extract pytest functions from file
 const extractTestFunctions = (fileContent: string): string[] => {
     // regex to find test function
-    const testFunctionRegex = /^\s*def\s+(bundle_[a-zA-Z0-9_]*)\s*\(/gm;
+    const testFunctionRegex = /\s*def\s+(bundle_[a-zA-Z0-9_]*)\s*\(/gm;
     const matches: string[] = [];
     let match;
     while ((match = testFunctionRegex.exec(fileContent)) !== null) {
@@ -59,7 +59,7 @@ router.post("/:file/add-tests-from-file", async (req: Request, res: Response) =>
             const test = new Test();
             test.testName = testName;
             test.fileName = file;
-            test.filePath = (`${process.env.TEST_DIR}${file}${file}.py`);
+            test.filePath = (`${process.env.TEST_DIR}/${file}/${file}.py`);
             test.groups = [];
             return test;
         });
