@@ -13,6 +13,7 @@
   "dependencies": {
     "@types/cors": "^2.8.17",
     "@types/node": "^22.9.0",
+    "ansi-regex": "^6.1.0",
     "body-parser": "^1.20.3",
     "child_process": "^1.0.2",
     "cors": "^2.8.5",

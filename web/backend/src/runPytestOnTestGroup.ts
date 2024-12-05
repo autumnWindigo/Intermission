@@ -9,6 +9,7 @@ import { TestResult } from "./entity/TestResult";
 import { TestGroup } from "./entity/TestGroup";
 import path from "path";
 import "dotenv/config";
+import ansiRegex from "ansi-regex";
 
 export async function runPytestForTestGroup(groupId: number): Promise<TestGroup> {
     const testGroupRepository = AppDataSource.getRepository(TestGroup);
@@ -68,9 +69,20 @@ export async function runPytestForTestGroup(groupId: number): Promise<TestGroup>
             Very explicitly lists subtests passed and failed
             */
 
-            // Parse output from pytest success
-            const passedSubtests = -1
-            const failedSubtests = -1
+            // Clean the ANSI escape codes
+            const cleanOutput = stdout.replace(ansiRegex(), '');
+
+            // Regex to extract passed subtests
+            const passedMatch = cleanOutput.match(/(\d+)\s+subtests passed/i);
+
+            // Regex to extract failed subtests
+            const failedMatch = cleanOutput.match(/(\d+)\s+failed/i);
+
+            // Set subtest variables to match
+            const passedSubtests = passedMatch ? parseInt(passedMatch[1], 10) : 0;
+            const failedSubtests = failedMatch ? parseInt(failedMatch[1], 10) : 0;
+
+            // Set success if gracefully exits
             const overallSuccess = code === 0;
 
             // Create and save TestResult
@@ -78,7 +90,7 @@ export async function runPytestForTestGroup(groupId: number): Promise<TestGroup>
             testResult.testGroup = testGroup;
             testResult.output = stdout;
             testResult.passedSubtests = passedSubtests;
-            testResult.failedSubtests = failedSubtests;
+            testResult.failedSubtests = failedSubtests || 0;
             testResult.overallSuccess = overallSuccess;
 
             // Save results to DB

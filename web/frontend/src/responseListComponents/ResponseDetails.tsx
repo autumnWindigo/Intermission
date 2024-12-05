@@ -44,8 +44,11 @@ const ResponeDetails: React.FC<ResponseDetailsProps> = ({ result }) => {
             </button>
             <div className={`expanded-details ${isExpanded ? "expanded" : ""}`}>
                 {isExpanded && <>
-                    <div>Passed: {result.passedSubtests}</div>
-                    <div>Failed: {result.failedSubtests}</div>
+                    <b>
+                        <div>Passed: {result.passedSubtests}</div>
+                        <div>Failed: {result.failedSubtests}</div>
+                    </b>
+                    <br />
                     <div dangerouslySetInnerHTML={{ __html: cleanOutput(result.output) }} />
                 </>}
             </div>
