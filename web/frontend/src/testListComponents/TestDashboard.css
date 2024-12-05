@@ -1,0 +1,22 @@
+/* Button for adding a new test group */
+.add-test-from-file {
+    position: absolute;
+    top: 0.85rem;
+    right: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-test-from-file:hover {
+    background-color: #0056b3;
+}
+
+.add-test-from-file:active {
+    background-color: #004085;
+}

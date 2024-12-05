@@ -8,6 +8,7 @@ import ResponseDashboard from "../responseListComponents/ResponseDashboard";
 import TestGroupDashboard from "../testGroupComponents/TestGroupDashboard";
 import TestDashboard from "../testListComponents/TestDashboard";
 import './DashboardLayout.css';
+import './modal.css';
 
 // Parent to dashboards treat this as Main
 const DashboardLayout: React.FC = () => {

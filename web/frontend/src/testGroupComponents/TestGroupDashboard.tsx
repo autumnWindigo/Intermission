@@ -90,12 +90,15 @@ const TestGroupDashboard: React.FC = () => {
             });
     };
 
+    // Remove group from DB then from UI
     const handleRemoveGroup = (groupToRemove: number) => {
         api
             .delete(`/api/test-group/${groupToRemove}`)
             .then((res) => {
                 console.log("Removed test:", res.data);
-                setTestGroups([...testGroups.filter(group => group.testGroupId !== res.data.testGroupId)]);
+                setTestGroups(prevTestGroups =>
+                    prevTestGroups.filter(group => group.testGroupId !== groupToRemove)
+                );
             })
             .catch((error) => {
                 console.error("Error adding new test group:", error);

@@ -15,6 +15,7 @@ import testController from "./controllers/testController";
 import testPost from "./entrypoints/testPost";
 import testPut from "./entrypoints/testPut";
 import testDelete from "./entrypoints/testDelete";
+import addTestsFromFile from "./entrypoints/addTestFromFile"
 
 import testGroupController from "./controllers/testGroupController";
 import addTestTogroup from "./entrypoints/addTestToGroup";
@@ -34,6 +35,7 @@ const PORT = 8000;
 // API nessecities
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.json());
 
 // Connect to DB
 AppDataSource.initialize()
@@ -49,6 +51,7 @@ app.use("/api/test", testPost); // POST (/test)
 app.use("/api/test", testPut); // PUT (/test/:id)
 app.use("/api/test", testDelete); // DELETE (/test/:id)
 app.use("/api/test", runSingleTest); // POST (/:id/run-test)
+app.use("/api/test", addTestsFromFile); // POST (/:file/add-tests-from-fil)
 
 
 // Insert routers for Test Groups

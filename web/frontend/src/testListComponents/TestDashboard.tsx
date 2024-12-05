@@ -1,12 +1,20 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import api from "../api";
 import { Test } from "../testGroupComponents/types";
+import AddTestFromFileModal from "./AddTestFromFileModal";
 import TestTile from "./TestTile";
+import "./TestDashboard.css";
+
 
 const TestDashboard: React.FC = () => {
     const [tests, setTests] = useState<Test[]>([]);
     const [currentTest, setCurrentTest] = useState<Test | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     // const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+    const handleAddTests = (tests: Test[]) => {
+        setTests((prevTests) => [...prevTests, ...tests]);
+    }
 
     // Grab tests from DB on load
     useEffect(() => {
@@ -51,9 +59,18 @@ const TestDashboard: React.FC = () => {
             });
     };
 
-    return(
+    return (
         <div className="test-dashboard-container">
             <div className="test-dashboard">
+                {/* Add Test From File Button */}
+                <button className="add-test-from-file" onClick={() => setIsModalOpen(true)}>
+                    Add Test From File
+                </button>
+                <AddTestFromFileModal
+                    isOpen={isModalOpen}
+                    onClose={() => setIsModalOpen(false)}
+                    onAddTests={handleAddTests}
+                />
                 {tests.map((test) => (
                     <div key={test.testId}>
                         <TestTile
