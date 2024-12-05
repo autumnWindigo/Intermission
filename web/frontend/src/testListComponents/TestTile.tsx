@@ -10,7 +10,8 @@ import testRunApi from "../testRunApi";
 interface TestTileProps {
     test: Test, // Test object obvious
     // For editing tests (need to update parent)
-    onUpdateTest: (result: Boolean, output: string) => void;
+    onUpdateTest: (result: Boolean, output: string) => void,
+    onRemoveTest: (testId: number) => void; // New prop for removing test
 };
 
 // Tile to be in a list of tests.
@@ -18,6 +19,7 @@ interface TestTileProps {
 const TestTile: React.FC<TestTileProps> = ({
     test,
     onUpdateTest,
+    onRemoveTest
 }) => {
     const [isTestRunning, setIsTestRunning] = useState(false);
 
@@ -40,25 +42,27 @@ const TestTile: React.FC<TestTileProps> = ({
                 setIsTestRunning(false);
             })
     }
-
     /* this should hold
     button to run test
     button to edit test
     only return boolean and output from pytest (not saved in DB)
       test groups should be used for long term tracking.
     */
+    const handleRemoveTest = () => {
+    };
     return (
         <div className='test-tile'>
-            {/* Should make into a play button */}
             <div className='test-name'>
                 {test.testName}
             </div>
             <button onClick={handleRunTest} disabled={isTestRunning}>
-                { isTestRunning ? "Running..." : "Run Tests" }
+                {isTestRunning ? "Running..." : "Run Tests"}
             </button>
             <button>Edit Test</button>
+            <button onClick={handleRemoveTest} className="remove-test">Remove Test</button>
+            {/* Corrected line */}
         </div>
-    );
-}
+    )
+};
 
 export default TestTile;

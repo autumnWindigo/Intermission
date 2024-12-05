@@ -37,7 +37,10 @@ const TestDashboard: React.FC = () => {
     //         })
     //     setIsEditModalOpen(false);
     // };
-
+    const removeTest = (testID: number) => {
+        api
+            .delete("/api/test/number")
+    };
     return(
         <div className="test-dashboard-container">
             <div className="test-dashboard">
@@ -46,6 +49,7 @@ const TestDashboard: React.FC = () => {
                         <TestTile
                             test={test}
                             onUpdateTest={updateTest}
+                            onRemoveTest={removeTest}
                         />
                     </div>
                 ))}
