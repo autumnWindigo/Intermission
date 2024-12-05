@@ -106,51 +106,53 @@ const TestGroupDashboard: React.FC = () => {
     // Will make a nicer looking title / holding space for them later
     console.log(testGroups);
     return (
-        <div className="dashboard-container">
-            <button className="add-group" onClick={() => setIsGroupAddModelOpen(true)}>
-                Add Test Group
-            </button>
-            <div className="dashboard">
-                {testGroups.map((group) => (
-                    <div key={group.testGroupId}>
-                        <TestGroupTile
-                            key={group.testGroupId}
-                            group={group}
-                            onUpdateGroup={updateGroup}
-                            onRemoveGroup={handleRemoveGroup}
-                            onAddTests={() => {
-                                setCurrentGroup(group);
-                                setIsAddModalOpen(true);
-                            }}
-                            onEditGroup={() => {
-                                setCurrentGroup(group);
-                                setIsEditModalOpen(true);
-                            }}
-                        />
-                    </div>
-                ))}
-                {/* Group set in modal when visible */}
-                <TestAddToGroupModal
-                    isOpen={isAddModalOpen}
-                    onClose={() => setIsAddModalOpen(false)}
-                    onAddTests={handleAddTests}
-                    group={currentGroup} // Pass the current group to the modal
-                />
+        <div className="test-group-dashboard">
+            <div className="dashboard-container">
+                <button className="add-group" onClick={() => setIsGroupAddModelOpen(true)}>
+                    Add Test Group
+                </button>
+                <div className="dashboard">
+                    {testGroups.map((group) => (
+                        <div key={group.testGroupId}>
+                            <TestGroupTile
+                                key={group.testGroupId}
+                                group={group}
+                                onUpdateGroup={updateGroup}
+                                onRemoveGroup={handleRemoveGroup}
+                                onAddTests={() => {
+                                    setCurrentGroup(group);
+                                    setIsAddModalOpen(true);
+                                }}
+                                onEditGroup={() => {
+                                    setCurrentGroup(group);
+                                    setIsEditModalOpen(true);
+                                }}
+                            />
+                        </div>
+                    ))}
+                    {/* Group set in modal when visible */}
+                    <TestAddToGroupModal
+                        isOpen={isAddModalOpen}
+                        onClose={() => setIsAddModalOpen(false)}
+                        onAddTests={handleAddTests}
+                        group={currentGroup} // Pass the current group to the modal
+                    />
 
-                <EditTestGroupModal
-                    isOpen={isEditModalOpen}
-                    onClose={() => setIsEditModalOpen(false)}
-                    onEditGroup={handleEditGroup}
-                    currentName={currentGroup?.name || ""}
-                    currentSchedule={currentGroup?.schedule || ""}
-                    currentId={currentGroup?.testGroupId || -1}
-                />
+                    <EditTestGroupModal
+                        isOpen={isEditModalOpen}
+                        onClose={() => setIsEditModalOpen(false)}
+                        onEditGroup={handleEditGroup}
+                        currentName={currentGroup?.name || ""}
+                        currentSchedule={currentGroup?.schedule || ""}
+                        currentId={currentGroup?.testGroupId || -1}
+                    />
 
-                <TestGroupAddModal
-                    isOpen={isGroupAddModelOpen}
-                    onClose={() => setIsGroupAddModelOpen(false)}
-                    onAddGroup={handleNewGroup}
-                />
+                    <TestGroupAddModal
+                        isOpen={isGroupAddModelOpen}
+                        onClose={() => setIsGroupAddModelOpen(false)}
+                        onAddGroup={handleNewGroup}
+                    />
+                </div>
             </div>
         </div>
     );

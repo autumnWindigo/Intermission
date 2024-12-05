@@ -1,0 +1,92 @@
+/* Container for the entire dashboard */
+.results-dashboard {
+    padding: 20px;
+    overflow-y: auto; /* Enable vertical scrolling */
+    height: 90vh; /* Just enough height to see */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Each individual response tile */
+.results-dashboard .response-tile {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px;
+    margin: 0.5vh; /* Remove extra margins */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Make title and button on same line */
+.results-dashboard .response-tile-header {
+    display: flex;
+    align-items: center;
+}
+
+/* Styling for the title (h3) */
+.results-dashboard .response-tile-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Expand button styling */
+.results-dashboard .response-tile-header button {
+    background: none;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 4px 8px;
+}
+
+/* Expanded content */
+.results-dashboard .expanded-content {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+    white-space: pre-wrap; /* Preserve text formatting for output */
+}
+
+/* Show content when expanded */
+.results-dashboard .expanded-content.expanded {
+    max-height: 500px;
+    opacity: 1;
+    overflow: auto;
+}
+
+
+/* Dashboard scrolling */
+.results-dashboard .dashboard-container {
+    height: 100%;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* Response Details  */
+.reponse-details button {
+    background: none;
+    border: none;
+    display: flex;
+    font-size: 14px;
+    color: #007bff;
+    cursor: pointer;
+    padding: 4px 8px;
+    align-items: center;
+}
+
+/* Response Details Expanded Content */
+.expanded-details.expanded {
+    background-color: #2d2d2d; /* Should look like a code block */
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 8px;
+    overflow-x: auto;
+    font-family: "Courier New", Courier, monospace;
+    color: #dcdcdc;
+    font-size: 14px;
+}

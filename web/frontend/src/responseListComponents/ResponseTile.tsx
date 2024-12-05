@@ -5,8 +5,6 @@
 
 import React, { useState } from "react";
 import { TestGroup } from "../testGroupComponents/types";
-import PassCircle from "./PassCircle";
-import FailSquare from "./FailSquare";
 import ResponeDetails from "./ResponseDetails";
 
 interface ResponseTileProps {
@@ -20,30 +18,23 @@ const ResponseTile: React.FC<ResponseTileProps> = ({ group }) => {
         setIsExpanded((prev) => !prev);
     }
 
-    const loadResultShorthand = (result: Boolean) => {
-        if (result) return <PassCircle />;
-        return <FailSquare />
-    }
 
     return (
-        <div className="response-tile">
-            <h3>{group.name}</h3>
-            <button onClick={toggleExpansion}>
-                {isExpanded ? "Collapse" : "Expand"}
-            </button>
-            {group.results.sort((a,b) => // sort to show most recent first
+        <div className="response-tile" key={group.testGroupId}>
+            <div className="response-tile-header">
+                <button onClick={toggleExpansion}>
+                <h3>{group.name}</h3>
+                </button>
+            </div>
+            {group.results.sort((a, b) => // sort to show most recent first
                 b.createdAt.toLocaleString().localeCompare(a.createdAt.toLocaleString()))
                 .map((result) => ( // map to components
-                <div className={`expanded-content ${isExpanded ? "expanded" : ""}`}>
-                    {isExpanded && <>
-                        <p>{new Date(result.createdAt).toLocaleString()}</p>
-                        <div key="result-shorthand">
-                            {loadResultShorthand(result.overallSuccess)}
-                        </div>
-                        <ResponeDetails result={result} />
-                    </>}
-                </div>
-            ))}
+                    <div className={`expanded-content ${isExpanded ? "expanded" : ""}`}>
+                        {isExpanded && <>
+                            <ResponeDetails result={result} />
+                        </>}
+                    </div>
+                ))}
         </div>
     )
 }

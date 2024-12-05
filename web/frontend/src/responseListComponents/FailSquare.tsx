@@ -1,7 +1,7 @@
 const FailSquare: React.FC = () => {
     return (
         <div className="fail-sqaure">
-            F
+            🟥 {/* This is a red square trust me */}
         </div>
     )
 }

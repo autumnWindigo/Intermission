@@ -3,7 +3,7 @@
  December 5
  CSS for Test Group Dashboard */
 
-.test-group-tile {
+.test-group-dashboard .test-group-tile {
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -16,20 +16,20 @@
     z-index: 1;  /* Default, lower than the modal */
 }
 
-.test-group-tile:hover {
+.test-group-dashboard .test-group-tile:hover {
     /* Slightly increase the size */
     transform: scale(1.05);
     /* Add slight shadow */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.test-group-tile.expanded {
+.test-group-dashboard .test-group-tile.expanded {
     background-color: #ffffff;
     /* Slightly enlarges the tile */
     transform: scale(1.02);
 }
 
-.test-group-tile .expanded-content {
+.test-group-dashboard .test-group-tile .expanded-content {
     max-height: 500px;
     opacity: 1;
     transition: max-height 0.5s ease-in-out, opacity 0.3s ease;
@@ -37,7 +37,7 @@
 }
 
 /* Animated closing content */
-.test-group-tile .expanded-content:not(.expanded) {
+.test-group-dashboard .test-group-tile .expanded-content:not(.expanded) {
     /* Collapse the content */
     max-height: 0;
     /* Fade out */
@@ -46,14 +46,14 @@
     overflow: hidden;
 }
 
-.dashboard {
+.test-group-dashboard .dashboard {
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
     justify-content: flex-start;
 }
 
-.dashboard-header {
+.test-group-dashboard .dashboard-header {
     width: 100%;
     padding: 16px;
     background-color: #f5f5f5;
@@ -61,20 +61,20 @@
     border-bottom: 2px solid #e0e0e0;
 }
 
-.test-group-tile ul {
+.test-group-dashboard .test-group-tile ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
 /* Adjusts font for test-path */
-.test-group-tile .test-path {
+.test-group-dashboard .test-group-tile .test-path {
     color: #888888;
     font-size: 0.9rem;
 }
 
 /* Modal Overlay */
-.modal-overlay {
+.test-group-dashboard .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -88,7 +88,7 @@
 }
 
 /* Modal Content */
-.modal {
+.test-group-dashboard .modal {
   background-color: white;
   padding: 20px;
   border-radius: 8px;
@@ -100,7 +100,7 @@
   transition: all 0.3s ease;
 }
 
-.modal ul {
+.test-group-dashboard .modal ul {
     list-style: none;
     padding: 0;
     margin: 0;
