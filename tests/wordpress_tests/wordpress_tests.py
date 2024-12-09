@@ -10,7 +10,6 @@ class Context(BundleContext):
 
     def __init__(self, dummy: str = ""):
         super().__init__()
-        self.dummy = dummy
 
 
 class TestWordpress(TestBundle):
