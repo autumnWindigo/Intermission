@@ -1,3 +1,8 @@
+//*** Andrew Kantner
+//*** Database Management Systems
+//*** December 5
+//*** Element to show red square
+
 const FailSquare: React.FC = () => {
     return (
         <div className="fail-sqaure">

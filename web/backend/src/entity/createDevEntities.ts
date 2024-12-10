@@ -1,3 +1,8 @@
+//*** Andrew Kantner
+//*** Database Management Systems
+//*** December 5
+//*** Create example entities in DB
+
 import { env } from "process";
 import { AppDataSource } from "../data-source";
 import { Test } from "./Test";

@@ -1,3 +1,8 @@
+//*** Andrew Kantner
+//*** Database Management Systems
+//*** December 5
+//*** Delete test group from database
+
 import { TestGroup } from "../entity/TestGroup";
 import { Router, Request, Response } from "express";
 import { AppDataSource } from "../data-source";

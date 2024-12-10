@@ -1,3 +1,8 @@
+//*** Andrew Kantner
+//*** Database Management Systems
+//*** December 5
+//*** Modal for adding tests to file
+
 import React, { useState } from "react";
 import api from "../api";
 import { Test } from "../testGroupComponents/types";

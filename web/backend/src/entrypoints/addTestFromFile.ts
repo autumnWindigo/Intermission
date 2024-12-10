@@ -1,3 +1,8 @@
+//*** Andrew Kantner
+//*** Database Management Systems
+//*** December 5
+//*** Add tests to test group from matching test directory
+
 import { Router, Request, Response } from "express";
 import { AppDataSource } from "../data-source";
 import { Test } from "../entity/Test";
